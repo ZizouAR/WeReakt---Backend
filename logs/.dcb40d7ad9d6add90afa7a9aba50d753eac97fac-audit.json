@@ -1,0 +1,19 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/.dcb40d7ad9d6add90afa7a9aba50d753eac97fac-audit.json",
+    "files": [
+        {
+            "date": 1645643631022,
+            "name": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/2022-02-23.log",
+            "hash": "de2d3e1ebc39784253db7402b947d237"
+        },
+        {
+            "date": 1645662797197,
+            "name": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/2022-02-24.log",
+            "hash": "a97bb1eb5078e726d9b53789414aa842"
+        }
+    ]
+}

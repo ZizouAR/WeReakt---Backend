@@ -26,5 +26,5 @@ function seed(dbName, user, password) {
   ]);
 }
 
-seed('afteracademy-blog-db', 'afteracademy-blog-db-user', 'changeit');
-seed('afteracademy-blog-test-db', 'afteracademy-blog-test-db-user', 'changeit');
+seed('wereakt', 'abdelhamid', 'Larachi711WeReakt');
+seed('wereakt-test', 'abdelhamid-test', 'mtptest');

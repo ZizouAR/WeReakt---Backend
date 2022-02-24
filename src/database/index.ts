@@ -1,11 +1,9 @@
 import mongoose from 'mongoose';
 import Logger from '../core/Logger';
 import { db } from '../config';
+//import ApiKeyRepo from './repository/ApiKeyRepo';
+//import RoleRepo from './repository/RoleRepo';
 
-// Build the connection string
-const dbURI = `mongodb://${db.user}:${encodeURIComponent(db.password)}@${db.host}:${db.port}/${
-  db.name
-}`;
 
 const options = {
   useNewUrlParser: true,
@@ -20,11 +18,11 @@ const options = {
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
 };
 
-Logger.debug(dbURI);
+Logger.debug(db.uri);
 
 // Create the database connection
 mongoose
-  .connect(dbURI, options)
+  .connect(db.uri, options)
   .then(() => {
     Logger.info('Mongoose connection done');
   })
@@ -36,7 +34,7 @@ mongoose
 // CONNECTION EVENTS
 // When successfully connected
 mongoose.connection.on('connected', () => {
-  Logger.info('Mongoose default connection open to ' + dbURI);
+  Logger.info('Mongoose default connection open to ' + db.uri);
 });
 
 // If the connection throws an error
@@ -56,3 +54,8 @@ process.on('SIGINT', () => {
     process.exit(0);
   });
 });
+
+
+//ApiKeyRepo.seed();
+//RoleRepo.seed();
+
