@@ -5,7 +5,7 @@ class RoleRepo {
     static findByCode(code) {
         return Role_1.RoleModel.findOne({ code: code, status: true }).lean().exec();
     }
-    static insert() {
+    static seed() {
         return Role_1.RoleModel.insertMany([
             { code: 'LEARNER', status: true, createdAt: new Date(), updatedAt: new Date() },
             { code: 'WRITER', status: true, createdAt: new Date(), updatedAt: new Date() },

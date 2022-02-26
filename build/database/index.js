@@ -6,10 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Logger_1 = __importDefault(require("../core/Logger"));
 const config_1 = require("../config");
-const ApiKeyRepo_1 = __importDefault(require("./repository/ApiKeyRepo"));
-const RoleRepo_1 = __importDefault(require("./repository/RoleRepo"));
-// Build the connection string
-const dbURI = config_1.db.uri;
+//import ApiKeyRepo from './repository/ApiKeyRepo';
+//import RoleRepo from './repository/RoleRepo';
 const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -22,10 +20,10 @@ const options = {
     connectTimeoutMS: 10000,
     socketTimeoutMS: 45000,
 };
-Logger_1.default.debug(dbURI);
+Logger_1.default.debug(config_1.db.uri);
 // Create the database connection
 mongoose_1.default
-    .connect(dbURI, options)
+    .connect(config_1.db.uri, options)
     .then(() => {
     Logger_1.default.info('Mongoose connection done');
 })
@@ -36,7 +34,7 @@ mongoose_1.default
 // CONNECTION EVENTS
 // When successfully connected
 mongoose_1.default.connection.on('connected', () => {
-    Logger_1.default.info('Mongoose default connection open to ' + dbURI);
+    Logger_1.default.info('Mongoose default connection open to ' + config_1.db.uri);
 });
 // If the connection throws an error
 mongoose_1.default.connection.on('error', (err) => {
@@ -53,6 +51,6 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
-ApiKeyRepo_1.default.insert();
-RoleRepo_1.default.insert();
+//ApiKeyRepo.seed();
+//RoleRepo.seed();
 //# sourceMappingURL=index.js.map

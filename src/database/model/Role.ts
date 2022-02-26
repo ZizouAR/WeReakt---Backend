@@ -1,7 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
 
-export const DOCUMENT_NAME = 'Role';
-export const COLLECTION_NAME = 'roles';
 
 export const enum RoleCode {
   LEARNER = 'LEARNER',
@@ -43,5 +41,9 @@ const schema = new Schema(
     versionKey: false,
   },
 );
+
+
+const DOCUMENT_NAME = 'Role';
+const COLLECTION_NAME = 'roles';
 
 export const RoleModel = model<Role>(DOCUMENT_NAME, schema, COLLECTION_NAME);

@@ -5,7 +5,7 @@ class ApiRepo {
     static async findByKey(key) {
         return ApiKey_1.ApiKeyModel.findOne({ key: key, status: true }).lean().exec();
     }
-    static async insert() {
+    static async seed() {
         return ApiKey_1.ApiKeyModel.insertMany({
             metadata: 'To be used by the xyz vendor',
             key: 'GCMUDiuY5a7WvyUNt9n3QztToSHzK7Uj',
