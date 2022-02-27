@@ -8,6 +8,16 @@ export default class BlogRepo {
   private static BLOG_ALL_DATA =
     '+text +draftText +isSubmitted +isDraft +isPublished +status +createdBy +updatedBy';
 
+
+    public static findAllPublishedForAuthor(user: User): Promise<Blog[]> {
+      return BlogModel.find({ author: user, status: true, isPublished: true })
+        .populate('author', this.AUTHOR_DETAIL)
+        .sort({ updatedAt: -1 })
+        .lean<Blog>()
+        .exec();
+    }
+
+    
   public static async create(blog: Blog): Promise<Blog> {
     const now = new Date();
     blog.createdAt = now;
@@ -80,13 +90,7 @@ export default class BlogRepo {
       .exec();
   }
 
-  public static findAllPublishedForAuthor(user: User): Promise<Blog[]> {
-    return BlogModel.find({ author: user, status: true, isPublished: true })
-      .populate('author', this.AUTHOR_DETAIL)
-      .sort({ updatedAt: -1 })
-      .lean<Blog>()
-      .exec();
-  }
+
 
   public static findAllDrafts(): Promise<Blog[]> {
     return this.findDetailedBlogs({ isDraft: true, status: true });

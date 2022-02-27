@@ -16,7 +16,7 @@ export default interface Message extends Document {
   message: string;
   atachement?: Blob; 
   sender: User;
-  receiver_id: string;
+  receiver: string;
   isGroupeChat: boolean;
   type: MessageType;
   seen: boolean;
@@ -44,7 +44,7 @@ const schema = new Schema(
       required: true,
       index: true,
     },
-    receiver_id: {
+    receiver: {
       type: Schema.Types.ObjectId,
       required: true,
       index: true,

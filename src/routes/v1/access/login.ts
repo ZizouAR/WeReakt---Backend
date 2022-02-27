@@ -17,7 +17,7 @@ export default router.post(
   '/basic',
   validator(schema.userCredential),
   asyncHandler(async (req, res) => {
-    const user = await UserRepo.findByEmail(req.body.email);
+    const user = await UserRepo.findByPhone(req.body.tel);
     if (!user) throw new BadRequestError('User not registered');
     if (!user.password) throw new BadRequestError('Credential not set');
 
@@ -31,7 +31,7 @@ export default router.post(
     const tokens = await createTokens(user, accessTokenKey, refreshTokenKey);
 
     new SuccessResponse('Login Success', {
-      user: _.pick(user, ['_id', 'name', 'roles', 'profilePicUrl']),
+      user: _.pick(user, ['_id', 'name', 'roles', 'picture']),
       tokens: tokens,
     }).send(res);
   }),

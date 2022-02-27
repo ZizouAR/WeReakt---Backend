@@ -18,7 +18,7 @@ router.get(
   asyncHandler(async (req: ProtectedRequest, res) => {
     const user = await UserRepo.findPublicProfileById(new Types.ObjectId(req.params.id));
     if (!user) throw new BadRequestError('User not registered');
-    return new SuccessResponse('success', _.pick(user, ['name', 'profilePicUrl'])).send(res);
+    return new SuccessResponse('success', _.pick(user, ['name', 'picture'])).send(res);
   }),
 );
 
@@ -32,7 +32,7 @@ router.get(
   asyncHandler(async (req: ProtectedRequest, res) => {
     const user = await UserRepo.findProfileById(req.user._id);
     if (!user) throw new BadRequestError('User not registered');
-    return new SuccessResponse('success', _.pick(user, ['name', 'profilePicUrl', 'roles'])).send(
+    return new SuccessResponse('success', _.pick(user, ['name', 'picture', 'roles'])).send(
       res,
     );
   }),
@@ -46,12 +46,12 @@ router.put(
     if (!user) throw new BadRequestError('User not registered');
 
     if (req.body.name) user.name = req.body.name;
-    if (req.body.profilePicUrl) user.profilePicUrl = req.body.profilePicUrl;
+    if (req.body.picture) user.picture = req.body.picture;
 
     await UserRepo.updateInfo(user);
     return new SuccessResponse(
       'Profile updated',
-      _.pick(user, ['name', 'profilePicUrl', 'roles']),
+      _.pick(user, ['name', 'picture', 'roles']),
     ).send(res);
   }),
 );

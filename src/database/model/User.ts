@@ -1,31 +1,53 @@
 import { model, Schema, Document } from 'mongoose';
+import Job from './Job';
 import Role from './Role';
 
-export const DOCUMENT_NAME = 'User';
-export const COLLECTION_NAME = 'users';
+
 
 export default interface User extends Document {
-  name: string;
-  email?: string;
+  firstname: string;
+  lastname: string;
+  name?: string;
+  tel: number;
+  job?: Job;
   password?: string;
-  profilePicUrl?: string;
+  picture?: Buffer;
   roles: Role[];
   verified?: boolean;
-  status?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
+
 const schema = new Schema(
   {
-    name: {
+    firstname: {
       type: Schema.Types.String,
       required: true,
       trim: true,
       maxlength: 100,
     },
-    email: {
+    lastname: {
       type: Schema.Types.String,
+      required: true,
+      trim: true,
+      maxlength: 100,
+    },
+    name: {
+      type: Schema.Types.String,
+      required: false,
+      trim: true,
+      unique: true,
+      maxlength: 100,
+    },
+    job: {
+      type: Schema.Types.ObjectId,
+      ref: 'Job',
+      required: false,
+      index: true,
+    },
+    tel: {
+      type: Schema.Types.Number,
       required: true,
       unique: true,
       trim: true,
@@ -35,8 +57,9 @@ const schema = new Schema(
       type: Schema.Types.String,
       select: false,
     },
-    profilePicUrl: {
-      type: Schema.Types.String,
+    picture: {
+      type: Schema.Types.Buffer,
+      required: false,
       trim: true,
     },
     roles: {
@@ -51,26 +74,25 @@ const schema = new Schema(
     },
     verified: {
       type: Schema.Types.Boolean,
-      default: false,
-    },
-    status: {
-      type: Schema.Types.Boolean,
       default: true,
     },
     createdAt: {
       type: Date,
-      required: true,
-      select: false,
+      required: true
     },
     updatedAt: {
       type: Date,
-      required: true,
-      select: false,
+      required: true
     },
   },
   {
     versionKey: false,
   },
 );
+
+
+const DOCUMENT_NAME = 'User';
+const COLLECTION_NAME = 'users';
+
 
 export const UserModel = model<User>(DOCUMENT_NAME, schema, COLLECTION_NAME);
