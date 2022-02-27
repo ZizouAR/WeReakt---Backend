@@ -21,6 +21,6 @@ export default {
     //email: Joi.string().required().email(),
     password: Joi.string().required().min(6),
     picture: Joi.string().optional().uri(),
-    tel: Joi.string().required().length(10)
+    tel: Joi.string().required().length(10).pattern(/^[0-9]+$/).messages({'string.pattern.base': `Phone number must have 10 digits.`})
   }),
 };
