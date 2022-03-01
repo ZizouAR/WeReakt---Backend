@@ -37,17 +37,17 @@ exports.validateTokenData = (payload) => {
         !payload.sub ||
         !payload.aud ||
         !payload.prm ||
-        payload.iss !== config_1.tokenInfo.issuer ||
-        payload.aud !== config_1.tokenInfo.audience ||
+        payload.iss !== config_1.TOKEN_INFO.issuer ||
+        payload.aud !== config_1.TOKEN_INFO.audience ||
         !mongoose_1.Types.ObjectId.isValid(payload.sub))
         throw new ApiError_1.AuthFailureError('Invalid Access Token');
     return true;
 };
 exports.createTokens = async (user, accessTokenKey, refreshTokenKey) => {
-    const accessToken = await JWT_1.default.encode(new JWT_1.JwtPayload(config_1.tokenInfo.issuer, config_1.tokenInfo.audience, user._id.toString(), accessTokenKey, config_1.tokenInfo.accessTokenValidityDays));
+    const accessToken = await JWT_1.default.encode(new JWT_1.JwtPayload(config_1.TOKEN_INFO.issuer, config_1.TOKEN_INFO.audience, user._id.toString(), accessTokenKey, config_1.TOKEN_INFO.accessTokenValidityDays));
     if (!accessToken)
         throw new ApiError_1.InternalError();
-    const refreshToken = await JWT_1.default.encode(new JWT_1.JwtPayload(config_1.tokenInfo.issuer, config_1.tokenInfo.audience, user._id.toString(), refreshTokenKey, config_1.tokenInfo.refreshTokenValidityDays));
+    const refreshToken = await JWT_1.default.encode(new JWT_1.JwtPayload(config_1.TOKEN_INFO.issuer, config_1.TOKEN_INFO.audience, user._id.toString(), refreshTokenKey, config_1.TOKEN_INFO.refreshTokenValidityDays));
     if (!refreshToken)
         throw new ApiError_1.InternalError();
     return {

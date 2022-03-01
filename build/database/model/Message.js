@@ -12,8 +12,10 @@ const schema = new mongoose_1.Schema({
     },
     atachement: {
         // max 16mb
-        type: mongoose_1.Schema.Types.Buffer,
-        required: false
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Atachement',
+        required: false,
+        index: true,
     },
     sender: {
         type: mongoose_1.Schema.Types.ObjectId,

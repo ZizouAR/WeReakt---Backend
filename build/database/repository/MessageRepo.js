@@ -20,5 +20,5 @@ class MessageRepo {
     }
 }
 exports.default = MessageRepo;
-MessageRepo.USER_DETAILS = 'name profilePicUrl';
+MessageRepo.USER_DETAILS = 'name picture';
 //# sourceMappingURL=MessageRepo.js.map

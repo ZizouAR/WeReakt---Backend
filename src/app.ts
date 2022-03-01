@@ -1,27 +1,36 @@
 import express, { Request, Response, NextFunction } from 'express';
 import Logger from './core/Logger';
-import bodyParser from 'body-parser';
 import cors from 'cors';
-import { corsUrl, environment } from './config';
+import { CORS_URL, environment } from './config';
 import './database'; // initialize database
 import { NotFoundError, ApiError, InternalError } from './core/ApiError';
 import routesV1 from './routes/v1';
 
-process.on('uncaughtException', (e) => {
-  Logger.error(e);
-});
 
+
+process.on('uncaughtException', (e) => { Logger.error(e); });
 const app = express();
 
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }));
-app.use(cors({ origin: corsUrl, optionsSuccessStatus: 200 }));
+
+
+app.use(cors({ origin: CORS_URL}));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", CORS_URL);
+  next();
+});
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }));
+app.use(cors());
+
 
 // Routes
 app.use('/v1', routesV1);
 
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(new NotFoundError()));
+
+
 
 // Middleware Error Handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

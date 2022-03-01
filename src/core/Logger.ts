@@ -2,9 +2,9 @@ import { createLogger, transports, format } from 'winston';
 import fs from 'fs';
 import path from 'path';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import { environment, logDirectory } from '../config';
+import { environment, LOG_DIR } from '../config';
 
-let dir = logDirectory;
+let dir = LOG_DIR;
 if (!dir) dir = path.resolve('logs');
 
 // create directory if it is not present

@@ -1,20 +1,19 @@
 import { Schema, model, Document } from 'mongoose';
+import Attachement from './Attachement';
 import User from './User';
 
 
 export const enum MessageType {
   TEXT = 'TEXT',
   POKE = 'POKE',
-  AUDIO = 'AUDIO',
-  VIDEO = 'VIDEO',
-  IMAGE = 'IMAGE',
+  MEDIA = 'MEDIA',
   FILE = 'FILE',
 }
 
 
 export default interface Message extends Document {
   message: string;
-  atachement?: Blob; 
+  atachement?: Attachement; 
   sender: User;
   receiver: string;
   isGroupeChat: boolean;
@@ -35,8 +34,10 @@ const schema = new Schema(
     },
     atachement: {
       // max 16mb
-      type: Schema.Types.Buffer,
-      required: false
+      type: Schema.Types.ObjectId,
+      ref: 'Atachement',
+      required: false,
+      index: true,
     },
     sender: {
       type: Schema.Types.ObjectId,

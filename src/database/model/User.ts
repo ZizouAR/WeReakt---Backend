@@ -1,6 +1,7 @@
 import { model, Schema, Document } from 'mongoose';
 import Job from './Job';
 import Role from './Role';
+import Attachement from './Attachement';
 
 
 
@@ -11,7 +12,8 @@ export default interface User extends Document {
   tel: number;
   job?: Job;
   password?: string;
-  picture?: Buffer;
+  otp?: string;
+  picture?: Attachement;
   roles: Role[];
   verified?: boolean;
   createdAt?: Date;
@@ -57,8 +59,15 @@ const schema = new Schema(
       type: Schema.Types.String,
       select: false,
     },
+    otp: {
+      type: Schema.Types.String,
+      select: false,
+      required: false,
+    },
     picture: {
-      type: Schema.Types.Buffer,
+      type: Schema.Types.ObjectId,
+      ref: 'Attachement',
+      index: true,
       required: false,
       trim: true,
     },

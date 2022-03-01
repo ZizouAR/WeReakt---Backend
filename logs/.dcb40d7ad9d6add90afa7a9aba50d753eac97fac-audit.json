@@ -19,6 +19,16 @@
             "date": 1645977873516,
             "name": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/2022-02-27.log",
             "hash": "c7846b2c33f042950754657a4089ec88"
+        },
+        {
+            "date": 1646071591691,
+            "name": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/2022-02-28.log",
+            "hash": "f49b6e0a4fea88028a850cd0c8c3c2bb"
+        },
+        {
+            "date": 1646092565208,
+            "name": "/Users/nginx-iwnl/-nodejs-backend-architecture-typescript/logs/2022-03-01.log",
+            "hash": "181edf7534225e590c26060f532a0d5f"
         }
     ]
 }

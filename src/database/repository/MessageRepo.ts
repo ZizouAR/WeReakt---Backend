@@ -5,7 +5,7 @@ import User from '../model/User';
 
 export default class MessageRepo {
 
-  private static USER_DETAILS = 'name profilePicUrl';
+  private static USER_DETAILS = 'name picture';
 
   public static async create(message: Message): Promise<Message> {
     message.createdAt = new Date();

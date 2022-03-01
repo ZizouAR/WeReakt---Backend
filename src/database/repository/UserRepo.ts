@@ -6,6 +6,7 @@ import KeystoreRepo from './KeystoreRepo';
 import Keystore from '../model/Keystore';
 
 export default class UserRepo {
+  
   // contains critical information of the user
   public static findById(id: Types.ObjectId): Promise<User | null> {
     return UserModel.findOne({ _id: id, verified: true })

@@ -36,6 +36,7 @@ export default (schema: Joi.ObjectSchema, source: ValidationSource = ValidationS
   next: NextFunction,
 ) => {
   try {
+
     const { error } = schema.validate(req[source]);
 
     if (!error) return next();

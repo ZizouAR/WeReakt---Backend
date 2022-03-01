@@ -3,7 +3,7 @@ import { AuthFailureError, InternalError } from '../core/ApiError';
 import JWT, { JwtPayload } from '../core/JWT';
 import { Types } from 'mongoose';
 import User from '../database/model/User';
-import { tokenInfo } from '../config';
+import { TOKEN_INFO } from '../config';
 
 export const getAccessToken = (authorization?: string) => {
   if (!authorization) throw new AuthFailureError('Invalid Authorization');
@@ -18,8 +18,8 @@ export const validateTokenData = (payload: JwtPayload): boolean => {
     !payload.sub ||
     !payload.aud ||
     !payload.prm ||
-    payload.iss !== tokenInfo.issuer ||
-    payload.aud !== tokenInfo.audience ||
+    payload.iss !== TOKEN_INFO.issuer ||
+    payload.aud !== TOKEN_INFO.audience ||
     !Types.ObjectId.isValid(payload.sub)
   )
     throw new AuthFailureError('Invalid Access Token');
@@ -33,11 +33,11 @@ export const createTokens = async (
 ): Promise<Tokens> => {
   const accessToken = await JWT.encode(
     new JwtPayload(
-      tokenInfo.issuer,
-      tokenInfo.audience,
+      TOKEN_INFO.issuer,
+      TOKEN_INFO.audience,
       user._id.toString(),
       accessTokenKey,
-      tokenInfo.accessTokenValidityDays,
+      TOKEN_INFO.accessTokenValidityDays,
     ),
   );
 
@@ -45,11 +45,11 @@ export const createTokens = async (
 
   const refreshToken = await JWT.encode(
     new JwtPayload(
-      tokenInfo.issuer,
-      tokenInfo.audience,
+      TOKEN_INFO.issuer,
+      TOKEN_INFO.audience,
       user._id.toString(),
       refreshTokenKey,
-      tokenInfo.refreshTokenValidityDays,
+      TOKEN_INFO.refreshTokenValidityDays,
     ),
   );
 

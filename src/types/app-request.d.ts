@@ -7,6 +7,7 @@ declare interface PublicRequest extends Request {
 }
 
 declare interface RoleRequest extends PublicRequest {
+  file: any;
   currentRoleCode: string;
 }
 

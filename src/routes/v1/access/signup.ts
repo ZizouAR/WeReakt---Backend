@@ -3,8 +3,10 @@ import { SuccessResponse } from '../../../core/ApiResponse';
 import { RoleRequest } from 'app-request';
 import crypto from 'crypto';
 import UserRepo from '../../../database/repository/UserRepo';
+import AttachementRepo from '../../../database/repository/AttachementRepo';
 import { BadRequestError } from '../../../core/ApiError';
 import User from '../../../database/model/User';
+import { AttachementUse } from '../../../database/model/Attachement';
 import { createTokens } from '../../../auth/authUtils';
 import validator from '../../../helpers/validator';
 import schema from './schema';
@@ -12,34 +14,50 @@ import asyncHandler from '../../../helpers/asyncHandler';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
 import { RoleCode } from '../../../database/model/Role';
+import upload from '../../../helpers/uploadHandler'
+import Logger from '../../../core/Logger';
+
 
 const router = express.Router();
 
 router.post(
-  '/basic',
+  '/basic', upload.single('avatar'),
   validator(schema.signup),
   asyncHandler(async (req: RoleRequest, res) => {
-    const user = await UserRepo.findByPhone(req.body.tel);
+
+    // @CAST USER
+    const USER = req.body as User;
+
+    const attachement = req.file;
+    const user = await UserRepo.findByPhone(USER.tel);
     if (user) throw new BadRequestError('User already registered');
+
 
     const accessTokenKey = crypto.randomBytes(64).toString('hex');
     const refreshTokenKey = crypto.randomBytes(64).toString('hex');
-    const passwordHash = await bcrypt.hash(req.body.password, 10);
+    USER.password = await bcrypt.hash(USER.password, 10);
+
 
     const { user: createdUser, keystore } = await UserRepo.create(
-      {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        name: req.body.name,
-        job: req.body.job,
-        tel: req.body.tel,
-        picture: req.body.picture,
-        password: passwordHash,
-      } as User,
+      USER,
       accessTokenKey,
       refreshTokenKey,
       RoleCode.LEARNER,
     );
+    
+    
+    // @ATTACHEMENT
+    if(attachement){
+      Logger.info("Inserting file....")
+      attachement.user = createdUser._id;    
+      attachement.use = AttachementUse.PROFILE;
+      Logger.info(attachement)
+
+      // @SET PROFILE_PIC
+      createdUser.picture = await AttachementRepo.upload(attachement)
+      await UserRepo.updateInfo(createdUser);
+    }
+
 
     const tokens = await createTokens(createdUser, keystore.primaryKey, keystore.secondaryKey);
     new SuccessResponse('Signup Successful', {

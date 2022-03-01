@@ -39,8 +39,15 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.String,
         select: false,
     },
+    otp: {
+        type: mongoose_1.Schema.Types.String,
+        select: false,
+        required: false,
+    },
     picture: {
-        type: mongoose_1.Schema.Types.Buffer,
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Attachement',
+        index: true,
         required: false,
         trim: true,
     },

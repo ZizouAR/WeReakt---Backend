@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logDirectory = exports.tokenInfo = exports.corsUrl = exports.db = exports.port = exports.environment = void 0;
+exports.LOG_DIR = exports.TOKEN_INFO = exports.UPLOAD_SIZE_LIMIT = exports.CORS_URL = exports.db = exports.port = exports.environment = void 0;
 // Mapper for environment variables
 exports.environment = process.env.NODE_ENV;
 exports.port = process.env.PORT;
@@ -12,12 +12,13 @@ exports.db = {
     user: process.env.DB_USER || '',
     password: process.env.DB_USER_PWD || '',
 };
-exports.corsUrl = process.env.CORS_URL;
-exports.tokenInfo = {
+exports.CORS_URL = process.env.CORS_URL;
+exports.UPLOAD_SIZE_LIMIT = process.env.UPLOAD_SIZE_LIMIT;
+exports.TOKEN_INFO = {
     accessTokenValidityDays: parseInt(process.env.ACCESS_TOKEN_VALIDITY_SEC || '0'),
     refreshTokenValidityDays: parseInt(process.env.REFRESH_TOKEN_VALIDITY_SEC || '0'),
     issuer: process.env.TOKEN_ISSUER || '',
     audience: process.env.TOKEN_AUDIENCE || '',
 };
-exports.logDirectory = process.env.LOG_DIR;
+exports.LOG_DIR = process.env.LOG_DIR;
 //# sourceMappingURL=config.js.map

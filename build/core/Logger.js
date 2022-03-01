@@ -8,7 +8,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const winston_daily_rotate_file_1 = __importDefault(require("winston-daily-rotate-file"));
 const config_1 = require("../config");
-let dir = config_1.logDirectory;
+let dir = config_1.LOG_DIR;
 if (!dir)
     dir = path_1.default.resolve('logs');
 // create directory if it is not present
