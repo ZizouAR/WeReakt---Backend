@@ -10,6 +10,7 @@ import validator, { ValidationSource } from '../helpers/validator';
 import schema from './schema';
 import asyncHandler from '../helpers/asyncHandler';
 
+
 const router = express.Router();
 
 export default router.use(
@@ -24,6 +25,7 @@ export default router.use(
       const user = await UserRepo.findById(new Types.ObjectId(payload.sub));
       if (!user) throw new AuthFailureError('User not registered');
       req.user = user;
+
 
       const keystore = await KeystoreRepo.findforKey(req.user._id, payload.prm);
       if (!keystore) throw new AuthFailureError('Invalid access token');

@@ -39,7 +39,8 @@ const schema = new Schema(
     status: {
       type: Date,
       required: true,
-      default: EmployeeStatus.ABSENT
+      default: EmployeeStatus.ABSENT,
+      enum: [EmployeeStatus.ABSENT, EmployeeStatus.OFF, EmployeeStatus.PRESENT]
     },
     elapsed: {
       type: Number,

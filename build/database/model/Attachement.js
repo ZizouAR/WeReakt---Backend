@@ -56,6 +56,7 @@ const schema = new mongoose_1.Schema({
     use: {
         type: mongoose_1.Schema.Types.String,
         required: true,
+        enum: ["PROFILE" /* PROFILE */, "REQUEST" /* REQUEST */, "SUPPORT" /* SUPPORT */, "CHAT" /* CHAT */]
     },
 }, {
     versionKey: false,

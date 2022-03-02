@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GroupsModel = void 0;
+exports.GroupModel = void 0;
 const mongoose_1 = require("mongoose");
 const schema = new mongoose_1.Schema({
     name: {
@@ -40,7 +40,7 @@ const schema = new mongoose_1.Schema({
 }, {
     versionKey: false,
 });
-const DOCUMENT_NAME = 'Request';
-const COLLECTION_NAME = 'requests';
-exports.GroupsModel = mongoose_1.model(DOCUMENT_NAME, schema, COLLECTION_NAME);
-//# sourceMappingURL=Groups.js.map
+const DOCUMENT_NAME = 'Group';
+const COLLECTION_NAME = 'groups';
+exports.GroupModel = mongoose_1.model(DOCUMENT_NAME, schema, COLLECTION_NAME);
+//# sourceMappingURL=Group.js.map

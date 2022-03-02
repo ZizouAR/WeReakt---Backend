@@ -16,7 +16,6 @@ const asyncHandler_1 = __importDefault(require("../../../helpers/asyncHandler"))
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const lodash_1 = __importDefault(require("lodash"));
 const uploadHandler_1 = __importDefault(require("../../../helpers/uploadHandler"));
-const Logger_1 = __importDefault(require("../../../core/Logger"));
 const router = express_1.default.Router();
 router.post('/basic', uploadHandler_1.default.single('avatar'), validator_1.default(schema_1.default.signup), asyncHandler_1.default(async (req, res) => {
     // @CAST USER
@@ -28,13 +27,11 @@ router.post('/basic', uploadHandler_1.default.single('avatar'), validator_1.defa
     const accessTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     const refreshTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     USER.password = await bcrypt_1.default.hash(USER.password, 10);
-    const { user: createdUser, keystore } = await UserRepo_1.default.create(USER, accessTokenKey, refreshTokenKey, "LEARNER" /* LEARNER */);
+    const { user: createdUser, keystore } = await UserRepo_1.default.create(USER, accessTokenKey, refreshTokenKey, "WRITER" /* WRITER */);
     // @ATTACHEMENT
     if (attachement) {
-        Logger_1.default.info("Inserting file....");
         attachement.user = createdUser._id;
         attachement.use = "PROFILE" /* PROFILE */;
-        Logger_1.default.info(attachement);
         // @SET PROFILE_PIC
         createdUser.picture = await AttachementRepo_1.default.upload(attachement);
         await UserRepo_1.default.updateInfo(createdUser);

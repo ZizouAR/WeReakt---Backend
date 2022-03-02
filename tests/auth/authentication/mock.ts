@@ -7,7 +7,7 @@ import JWT, { JwtPayload } from '../../../src/core/JWT';
 import { BadTokenError } from '../../../src/core/ApiError';
 import Keystore from '../../../src/database/model/Keystore';
 import * as authUtils from '../../../src/auth/authUtils';
-import { tokenInfo } from '../../../src/config';
+import { TOKEN_INFO } from '../../../src/config';
 
 export const ACCESS_TOKEN = 'xyz';
 
@@ -24,8 +24,8 @@ export const mockJwtValidate = jest.fn(
   async (token: string): Promise<JwtPayload> => {
     if (token === ACCESS_TOKEN)
       return {
-        iss: tokenInfo.issuer,
-        aud: tokenInfo.audience,
+        iss: TOKEN_INFO.issuer,
+        aud: TOKEN_INFO.audience,
         sub: USER_ID.toHexString(),
         iat: 1,
         exp: 2,

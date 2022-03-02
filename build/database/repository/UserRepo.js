@@ -14,7 +14,7 @@ class UserRepo {
             .select('+tel +password +roles')
             .populate({
             path: 'roles',
-            match: { verified: true },
+            match: { status: true },
         })
             .lean()
             .exec();
@@ -24,7 +24,7 @@ class UserRepo {
             .select('+tel +password +roles')
             .populate({
             path: 'roles',
-            match: { verified: true },
+            match: { status: true },
             select: { code: 1 },
         })
             .lean()
@@ -35,7 +35,7 @@ class UserRepo {
             .select('+roles')
             .populate({
             path: 'roles',
-            match: { verified: true },
+            match: { status: true },
             select: { code: 1 },
         })
             .lean()
@@ -45,17 +45,12 @@ class UserRepo {
         return User_1.UserModel.findOne({ _id: id, verified: true }).lean().exec();
     }
     static async create(user, accessTokenKey, refreshTokenKey, roleCode) {
-        const role = await Role_1.RoleModel.findOne({ code: roleCode })
-            .select('+tel +password')
-            .lean()
-            .exec();
+        const role = await Role_1.RoleModel.findOne({ code: roleCode }).lean().exec();
         if (!role)
             throw new ApiError_1.InternalError('Role must be defined');
-        user.roles = [role._id];
+        user.roles = [role._id, role._id, role._id, role._id];
         user.createdAt = user.updatedAt = new Date();
         user.name = user.firstname + " " + user.lastname;
-        // check phone number
-        //xxx
         const createdUser = await User_1.UserModel.create(user);
         const keystore = await KeystoreRepo_1.default.create(createdUser._id, accessTokenKey, refreshTokenKey);
         return { user: createdUser.toObject(), keystore: keystore };

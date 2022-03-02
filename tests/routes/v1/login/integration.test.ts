@@ -13,7 +13,7 @@ import ApiKey, { ApiKeyModel } from '../../../../src/database/model/ApiKey';
 
 export const createTokensSpy = jest.spyOn(authUtils, 'createTokens');
 export const bcryptCompareSpy = jest.spyOn(bcrypt, 'compare');
-export const userFindByEmailSpy = jest.spyOn(UserRepo, 'findByEmail');
+export const userFindByEmailSpy = jest.spyOn(UserRepo, 'findByPhone');
 export const keystoreCreateSpy = jest.spyOn(KeystoreRepo, 'create');
 
 describe('Login basic route', () => {
@@ -27,13 +27,12 @@ describe('Login basic route', () => {
   beforeAll(async () => {
     await UserModel.remove({}); // delete all data from user table
     user = await UserModel.create({
-      name: 'abc',
-      email: 'abc@xyz.com',
+      firstname: "lara",
+      lastname: "abdell",
+      tel: parseInt("0540613456"),
       password: bcrypt.hashSync(password, 10),
-      status: true,
       updatedAt: new Date(),
       createdAt: new Date(),
-      profilePicUrl: 'https:/abc.com/xyz',
       roles: [{ _id: new Types.ObjectId(), code: RoleCode.LEARNER } as Role],
     } as User);
     apikey = await ApiKeyModel.findOne({ status: true });
@@ -92,7 +91,7 @@ describe('Login basic route', () => {
   it('Should send error when password is not valid format', async () => {
     const response = await addHeaders(
       request.post(endpoint).send({
-        email: user.email,
+        tel: user.tel,
         password: '123',
       }),
       apikey,
@@ -125,7 +124,7 @@ describe('Login basic route', () => {
   it('Should send error for wrong password', async () => {
     const response = await addHeaders(
       request.post(endpoint).send({
-        email: user.email,
+        tel: user.tel,
         password: 'abc123',
       }),
       apikey,
@@ -141,7 +140,7 @@ describe('Login basic route', () => {
   it('Should send success response for correct credentials', async () => {
     const response = await addHeaders(
       request.post(endpoint).send({
-        email: user.email,
+        tel: user.tel,
         password: password,
       }),
       apikey,

@@ -37,7 +37,8 @@ const schema = new mongoose_1.Schema({
     type: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        default: "DISCLAIMER" /* DISCLAIMER */
+        default: "DISCLAIMER" /* DISCLAIMER */,
+        enum: ["ALERT" /* ALERT */, "DISCLAIMER" /* DISCLAIMER */, "EVENT" /* EVENT */, "IMPORTANT" /* IMPORTANT */, "URGENT" /* URGENT */]
     },
     seenBy: {
         type: Array,

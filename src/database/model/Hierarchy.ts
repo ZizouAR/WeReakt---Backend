@@ -3,19 +3,6 @@ import User from './User';
 
 
 
-export const enum INDUSTRIES {
-  ADVERTISING = 'ADVERTISING',
-  MARKETING = 'MARKETING',
-  TECHNOLOGY = 'TECHNOLOGY',
-  HEALTH = 'HEALTH',
-  FOOD = 'FOOD',
-  ENTERTAINEMENT = 'ENTERTAINEMENT',
-  PRODUCTION = 'PRODUCTION'
-}
-
-
-
-
 export default interface Hierarchy extends Document {
   network: string;
   createdBy: User;

@@ -83,6 +83,7 @@ const schema = new Schema(
     use: {
       type: Schema.Types.String,
       required: true,
+      enum: [AttachementUse.PROFILE, AttachementUse.REQUEST, AttachementUse.SUPPORT, AttachementUse.CHAT]
     },
   },
   {

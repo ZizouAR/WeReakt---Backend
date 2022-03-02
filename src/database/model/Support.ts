@@ -1,14 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 import User from './User';
-
-
-
-export const enum ResponseStatus {
-  PENDING = 'PENDING',
-  CANCELED = 'CANCELED',
-  OVERDUE = 'OVERDUE',
-  DONE = 'DONE'
-}
+import { ResponseStatus } from './Request';
 
 
 export default interface Support extends Document {
@@ -43,7 +35,8 @@ const schema = new Schema(
     status: {
       type: Schema.Types.String,
       required: true,
-      default: ResponseStatus.PENDING
+      default: ResponseStatus.PENDING,
+      enum: [ResponseStatus.CANCELED, ResponseStatus.DONE, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
     },
     reply: {
       type: Schema.Types.String,

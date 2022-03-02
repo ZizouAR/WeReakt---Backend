@@ -21,7 +21,8 @@ const schema = new mongoose_1.Schema({
     status: {
         type: Date,
         required: true,
-        default: "ABSENT" /* ABSENT */
+        default: "ABSENT" /* ABSENT */,
+        enum: ["ABSENT" /* ABSENT */, "OFF" /* OFF */, "PRESENT" /* PRESENT */]
     },
     elapsed: {
         type: Number,

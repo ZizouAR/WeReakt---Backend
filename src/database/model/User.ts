@@ -6,8 +6,8 @@ import Attachement from './Attachement';
 
 
 export default interface User extends Document {
-  firstname: string;
-  lastname: string;
+  firstname?: string;
+  lastname?: string;
   name?: string;
   tel: number;
   job?: Job;

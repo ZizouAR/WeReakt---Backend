@@ -6,7 +6,7 @@ import User from '../../../src/database/model/User';
 import Role, { RoleCode } from '../../../src/database/model/Role';
 import { BadTokenError } from '../../../src/core/ApiError';
 import JWT, { JwtPayload } from '../../../src/core/JWT';
-import { tokenInfo } from '../../../src/config';
+import { TOKEN_INFO } from '../../../src/config';
 
 export const LEARNER_ROLE_ID = new Types.ObjectId(); // random id
 export const WRITER_ROLE_ID = new Types.ObjectId(); // random id
@@ -85,8 +85,8 @@ export const mockJwtValidate = jest.fn(
     }
     if (subject)
       return {
-        iss: tokenInfo.issuer,
-        aud: tokenInfo.audience,
+        iss: TOKEN_INFO.issuer,
+        aud: TOKEN_INFO.audience,
         sub: subject,
         iat: 1,
         exp: 2,

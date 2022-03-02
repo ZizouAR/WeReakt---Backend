@@ -60,7 +60,8 @@ const schema = new Schema(
     type: {
       type: Schema.Types.String,
       required: true,
-      default: NoteType.DISCLAIMER
+      default: NoteType.DISCLAIMER,
+      enum: [NoteType.ALERT, NoteType.DISCLAIMER, NoteType.EVENT, NoteType.IMPORTANT, NoteType.URGENT]
     },
     seenBy: {
       type: Array,

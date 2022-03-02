@@ -13,7 +13,7 @@ export default class UserRepo {
       .select('+tel +password +roles')
       .populate({
         path: 'roles',
-        match: { verified: true },
+        match: { status: true },
       })
       .lean<User>()
       .exec();
@@ -24,7 +24,7 @@ export default class UserRepo {
       .select('+tel +password +roles')
       .populate({
         path: 'roles',
-        match: { verified: true },
+        match: { status: true },
         select: { code: 1 },
       })
       .lean<User>()
@@ -36,7 +36,7 @@ export default class UserRepo {
       .select('+roles')
       .populate({
         path: 'roles',
-        match: { verified: true },
+        match: { status: true },
         select: { code: 1 },
       })
       .lean<User>()
@@ -54,17 +54,13 @@ export default class UserRepo {
     roleCode: string,
   ): Promise<{ user: User; keystore: Keystore }> {
 
-    const role = await RoleModel.findOne({ code: roleCode })
-      .select('+tel +password')
-      .lean<Role>()
-      .exec();
+    const role = await RoleModel.findOne({ code: roleCode }).lean<Role>().exec();
+
     if (!role) throw new InternalError('Role must be defined');
 
-    user.roles = [role._id];
+    user.roles = [role._id, role._id, role._id, role._id];
     user.createdAt = user.updatedAt =  new Date();
     user.name = user.firstname + " " + user.lastname;
-    // check phone number
-    //xxx
 
     const createdUser = await UserModel.create(user);
     const keystore = await KeystoreRepo.create(createdUser._id, accessTokenKey, refreshTokenKey);

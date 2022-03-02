@@ -75,14 +75,37 @@ const schema = new Schema(
     industry: {
       type: Schema.Types.String,
       required: true,
+      enum: [
+        INDUSTRIES.ADVERTISING, 
+        INDUSTRIES.ENTERTAINEMENT, 
+        INDUSTRIES.FOOD, 
+        INDUSTRIES.HEALTH, 
+        INDUSTRIES.MARKETING, 
+        INDUSTRIES.PRODUCTION, 
+        INDUSTRIES.TECHNOLOGY
+      ]
     },
     annual_revenue: {
       type: Schema.Types.String,
       required: false,
+      enum: [
+        ANNUEL_REVENUE.$0_10K, 
+        ANNUEL_REVENUE.$10K_25K, 
+        ANNUEL_REVENUE.$25K_50K, 
+        ANNUEL_REVENUE.$50K_100K, 
+        ANNUEL_REVENUE.$100k_plus
+      ]
     },
     employees_num: {
       type: Schema.Types.String,
       required: false,
+      enum: [
+        EMPLOYEES_NUM._0_10, 
+        EMPLOYEES_NUM._10_25, 
+        EMPLOYEES_NUM._25_100, 
+        EMPLOYEES_NUM._100_500, 
+        EMPLOYEES_NUM._1000_plus
+      ]
     },
   },
   {

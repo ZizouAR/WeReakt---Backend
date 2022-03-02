@@ -14,8 +14,7 @@ import asyncHandler from '../../../helpers/asyncHandler';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
 import { RoleCode } from '../../../database/model/Role';
-import upload from '../../../helpers/uploadHandler'
-import Logger from '../../../core/Logger';
+import upload from '../../../helpers/uploadHandler';
 
 
 const router = express.Router();
@@ -24,6 +23,7 @@ router.post(
   '/basic', upload.single('avatar'),
   validator(schema.signup),
   asyncHandler(async (req: RoleRequest, res) => {
+
 
     // @CAST USER
     const USER = req.body as User;
@@ -36,22 +36,20 @@ router.post(
     const accessTokenKey = crypto.randomBytes(64).toString('hex');
     const refreshTokenKey = crypto.randomBytes(64).toString('hex');
     USER.password = await bcrypt.hash(USER.password, 10);
-
+ 
 
     const { user: createdUser, keystore } = await UserRepo.create(
       USER,
       accessTokenKey,
       refreshTokenKey,
-      RoleCode.LEARNER,
+      RoleCode.WRITER,
     );
     
     
     // @ATTACHEMENT
     if(attachement){
-      Logger.info("Inserting file....")
       attachement.user = createdUser._id;    
       attachement.use = AttachementUse.PROFILE;
-      Logger.info(attachement)
 
       // @SET PROFILE_PIC
       createdUser.picture = await AttachementRepo.upload(attachement)

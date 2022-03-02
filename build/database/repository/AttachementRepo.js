@@ -18,8 +18,8 @@ class AttachementRepo {
     static remove(id) {
         return Attachement_1.AttachementModel.findByIdAndRemove(id).lean().exec();
     }
-    static findById(network) {
-        return Attachement_1.AttachementModel.find({ network }).lean().exec();
+    static findById(attachement) {
+        return Attachement_1.AttachementModel.find({ attachement }).lean().exec();
     }
 }
 exports.default = AttachementRepo;

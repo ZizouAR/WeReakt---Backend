@@ -1,13 +1,14 @@
 import { Request } from 'express';
 import User from '../database/model/User';
 import Keystore from '../database/model/Keystore';
+import Attachement from '../database/model/Attachement';
 
 declare interface PublicRequest extends Request {
+  file?: Attachement
   apiKey: string;
 }
 
 declare interface RoleRequest extends PublicRequest {
-  file: any;
   currentRoleCode: string;
 }
 

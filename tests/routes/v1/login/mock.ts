@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import * as authUtils from '../../../../src/auth/authUtils';
 import Role from '../../../../src/database/model/Role';
 
-export const USER_EMAIL = 'random@test.com';
+export const USER_TEL = parseInt("0540613456");
 export const USER_PASSWORD = 'abc123';
 export const USER_PASSWORD_HASH = bcrypt.hashSync(USER_PASSWORD, 10);
 
@@ -26,16 +26,15 @@ export const mockKeystoreCreate = jest.fn(
 );
 
 export const mockUserFindByEmail = jest.fn(
-  async (email: string): Promise<User | null> => {
-    if (email === USER_EMAIL)
+  async (tel: number): Promise<User | null> => {
+    if (tel === USER_TEL)
       return {
         _id: USER_ID,
-        email: USER_EMAIL,
+        tel: USER_TEL,
         password: USER_PASSWORD_HASH,
         name: 'abc',
-        profilePicUrl: 'abc',
         roles: [] as Role[],
-      } as User;
+      };
     return null;
   },
 );

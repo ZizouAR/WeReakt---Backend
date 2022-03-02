@@ -9,7 +9,7 @@ export const enum Permission {
 }
 
 
-export default interface Groups extends Document {
+export default interface Group extends Document {
   name: string;
   users: Array<User>;
   private: boolean;
@@ -63,8 +63,8 @@ const schema = new Schema(
 
 
 
-const DOCUMENT_NAME = 'Request';
-const COLLECTION_NAME = 'requests';
+const DOCUMENT_NAME = 'Group';
+const COLLECTION_NAME = 'groups';
 
 
-export const GroupsModel = model<Groups>(DOCUMENT_NAME, schema, COLLECTION_NAME);
+export const GroupModel = model<Group>(DOCUMENT_NAME, schema, COLLECTION_NAME);

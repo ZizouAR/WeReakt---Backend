@@ -46,7 +46,8 @@ const schema = new Schema(
     status: {
       type: Schema.Types.String,
       required: true,
-      default: ResponseStatus.PENDING
+      default: ResponseStatus.PENDING,
+      enum: [ResponseStatus.CANCELED, ResponseStatus.DONE, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
     },
     reply: {
       type: Schema.Types.String,
