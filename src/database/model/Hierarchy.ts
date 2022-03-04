@@ -1,12 +1,12 @@
 import { Schema, model, Document } from 'mongoose';
+import Network from './Network';
 import User from './User';
 
 
 
 export default interface Hierarchy extends Document {
-  network: string;
-  createdBy: User;
-  createdAt: Date;
+  network: Network;
+  updatedBy: User;
   updatedAt?: Date;
   hierarchy: JSON;
 }
@@ -20,15 +20,11 @@ const schema = new Schema(
       required: true,
       index: true
     },
-    createdBy: {
+    updatedBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
       index: true
-    },
-    createdAt: {
-      type: Date,
-      required: true
     },
     updatedAt: {
       type: Date,

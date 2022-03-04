@@ -14,6 +14,12 @@ class GroupRepo {
     static findByGroup(group) {
         return Group_1.GroupModel.find({ group }).lean().exec();
     }
+    static isGroupChat(_id) {
+        return Group_1.GroupModel.findOne({ _id }).lean().exec();
+    }
+    static isMember(group, user) {
+        return group.members.includes(user);
+    }
 }
 exports.default = GroupRepo;
 //# sourceMappingURL=GroupsRepo.js.map

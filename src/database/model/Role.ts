@@ -2,10 +2,9 @@ import { Schema, model, Document } from 'mongoose';
 
 
 export const enum RoleCode {
-  LEARNER = 'LEARNER',
-  WRITER = 'WRITER',
-  EDITOR = 'EDITOR',
+  MODERATOR = 'MODERATOR',
   ADMIN = 'ADMIN',
+  OWNER = 'OWNER',
 }
 
 export default interface Role extends Document {
@@ -20,7 +19,7 @@ const schema = new Schema(
     code: {
       type: Schema.Types.String,
       required: true,
-      enum: [RoleCode.LEARNER, RoleCode.WRITER, RoleCode.EDITOR, RoleCode.ADMIN],
+      enum: [RoleCode.OWNER, RoleCode.ADMIN, RoleCode.MODERATOR],
     },
     status: {
       type: Schema.Types.Boolean,

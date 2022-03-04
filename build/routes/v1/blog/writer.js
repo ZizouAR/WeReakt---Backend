@@ -36,7 +36,7 @@ const role_1 = __importDefault(require("../../../helpers/role"));
 const router = express_1.default.Router();
 /*-------------------------------------------------------------------------*/
 // Below all APIs are private APIs protected for writer's role
-router.use('/', authentication_1.default, role_1.default("WRITER" /* WRITER */), authorization_1.default);
+router.use('/', authentication_1.default, role_1.default("ADMIN" /* ADMIN */), authorization_1.default);
 /*-------------------------------------------------------------------------*/
 const formatEndpoint = (endpoint) => endpoint.replace(/\s/g, '').replace(/\//g, '-');
 router.post('/', validator_1.default(schema_1.default.blogCreate), asyncHandler_1.default(async (req, res) => {

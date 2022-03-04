@@ -58,7 +58,7 @@ export default class UserRepo {
 
     if (!role) throw new InternalError('Role must be defined');
 
-    user.roles = [role._id, role._id, role._id, role._id];
+    user.roles = [role._id];
     user.createdAt = user.updatedAt =  new Date();
     user.name = user.firstname + " " + user.lastname;
 

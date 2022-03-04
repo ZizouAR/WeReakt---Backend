@@ -6,7 +6,7 @@ const schema = new mongoose_1.Schema({
     code: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        enum: ["LEARNER" /* LEARNER */, "WRITER" /* WRITER */, "EDITOR" /* EDITOR */, "ADMIN" /* ADMIN */],
+        enum: ["OWNER" /* OWNER */, "ADMIN" /* ADMIN */, "MODERATOR" /* MODERATOR */],
     },
     status: {
         type: mongoose_1.Schema.Types.Boolean,

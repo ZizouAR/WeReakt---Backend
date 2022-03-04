@@ -2,6 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import Job from './Job';
 import Role from './Role';
 import Attachement from './Attachement';
+import Network from './Network';
 
 
 
@@ -9,6 +10,7 @@ export default interface User extends Document {
   firstname?: string;
   lastname?: string;
   name?: string;
+  network?: Network;
   tel: number;
   job?: Job;
   password?: string;
@@ -45,6 +47,12 @@ const schema = new Schema(
     job: {
       type: Schema.Types.ObjectId,
       ref: 'Job',
+      required: false,
+      index: true,
+    },
+    network: {
+      type: Schema.Types.ObjectId,
+      ref: 'Network',
       required: false,
       index: true,
     },

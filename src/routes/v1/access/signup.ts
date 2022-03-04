@@ -6,7 +6,7 @@ import UserRepo from '../../../database/repository/UserRepo';
 import AttachementRepo from '../../../database/repository/AttachementRepo';
 import { BadRequestError } from '../../../core/ApiError';
 import User from '../../../database/model/User';
-import { AttachementUse } from '../../../database/model/Attachement';
+import { AttachementAs } from '../../../database/model/Attachement';
 import { createTokens } from '../../../auth/authUtils';
 import validator from '../../../helpers/validator';
 import schema from './schema';
@@ -42,14 +42,14 @@ router.post(
       USER,
       accessTokenKey,
       refreshTokenKey,
-      RoleCode.WRITER,
+      RoleCode.ADMIN,
     );
     
     
     // @ATTACHEMENT
     if(attachement){
       attachement.user = createdUser._id;    
-      attachement.use = AttachementUse.PROFILE;
+      attachement.as = AttachementAs.PROFILE;
 
       // @SET PROFILE_PIC
       createdUser.picture = await AttachementRepo.upload(attachement)

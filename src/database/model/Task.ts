@@ -31,11 +31,17 @@ const schema = new Schema(
       required: true,
       index: true
     },
+    from: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index: true
+    },
     status: {
       type: Schema.Types.String,
       required: true,
       default: ResponseStatus.PENDING,
-      enum: [ResponseStatus.CANCELED, ResponseStatus.DONE, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
+      enum: [ResponseStatus.CANCELED, ResponseStatus.CLOSED, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
 
     },
     createdAt: {

@@ -3,23 +3,16 @@ import Attachement from './Attachement';
 import User from './User';
 
 
-export const enum MessageType {
-  TEXT = 'TEXT',
-  POKE = 'POKE',
-  MEDIA = 'MEDIA',
-  FILE = 'FILE',
-}
-
 
 export default interface Message extends Document {
   message: string;
   atachement?: Attachement; 
   sender: User;
   receiver: string;
-  isGroupeChat: boolean;
-  type: MessageType;
-  seen: boolean;
-  seenBy: Array<User>;
+  isGroupeChat?: boolean;
+  hasAttachement?: boolean;
+  seen?: boolean;
+  seenBy?: User[];
   createdAt: Date;
 }
 
@@ -55,10 +48,10 @@ const schema = new Schema(
       required: true,
       default: false,
     },
-    type: {
-      type: Schema.Types.String,
+    hasAttachement: {
+      type: Schema.Types.Boolean,
       required: true,
-      default: MessageType.TEXT
+      default: false
     },
     seen: {
       type: Schema.Types.Boolean,

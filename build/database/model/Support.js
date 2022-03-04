@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RequestModel = void 0;
+exports.SupportModel = void 0;
 const mongoose_1 = require("mongoose");
 const schema = new mongoose_1.Schema({
     title: {
@@ -22,7 +22,7 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.String,
         required: true,
         default: "PENDING" /* PENDING */,
-        enum: ["CANCELED" /* CANCELED */, "DONE" /* DONE */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
+        enum: ["CANCELED" /* CANCELED */, "CLOSED" /* CLOSED */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
     },
     reply: {
         type: mongoose_1.Schema.Types.String,
@@ -30,7 +30,7 @@ const schema = new mongoose_1.Schema({
         maxlength: 1000,
         default: null
     },
-    sender: {
+    user: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
@@ -55,5 +55,5 @@ const schema = new mongoose_1.Schema({
 });
 const DOCUMENT_NAME = 'Support';
 const COLLECTION_NAME = 'support';
-exports.RequestModel = mongoose_1.model(DOCUMENT_NAME, schema, COLLECTION_NAME);
+exports.SupportModel = mongoose_1.model(DOCUMENT_NAME, schema, COLLECTION_NAME);
 //# sourceMappingURL=Support.js.map

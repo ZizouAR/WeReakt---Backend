@@ -28,6 +28,12 @@ const schema = new mongoose_1.Schema({
         required: false,
         index: true,
     },
+    network: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Network',
+        required: false,
+        index: true,
+    },
     tel: {
         type: mongoose_1.Schema.Types.Number,
         required: true,

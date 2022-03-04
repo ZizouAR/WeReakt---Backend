@@ -48,7 +48,7 @@ class UserRepo {
         const role = await Role_1.RoleModel.findOne({ code: roleCode }).lean().exec();
         if (!role)
             throw new ApiError_1.InternalError('Role must be defined');
-        user.roles = [role._id, role._id, role._id, role._id];
+        user.roles = [role._id];
         user.createdAt = user.updatedAt = new Date();
         user.name = user.firstname + " " + user.lastname;
         const createdUser = await User_1.UserModel.create(user);

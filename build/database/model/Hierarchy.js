@@ -9,15 +9,11 @@ const schema = new mongoose_1.Schema({
         required: true,
         index: true
     },
-    createdBy: {
+    updatedBy: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
         index: true
-    },
-    createdAt: {
-        type: Date,
-        required: true
     },
     updatedAt: {
         type: Date,

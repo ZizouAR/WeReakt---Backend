@@ -6,7 +6,7 @@ class AttachementRepo {
     static async upload(attachement) {
         attachement.createdAt = new Date();
         // @resize 250x250
-        if (attachement.use == "PROFILE" /* PROFILE */) {
+        if (attachement.as == "PROFILE" /* PROFILE */) {
             attachement.buffer = await sharp(attachement.buffer)
                 .resize({ width: 250, height: 250 })
                 .png()

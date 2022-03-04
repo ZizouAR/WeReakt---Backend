@@ -8,7 +8,7 @@ export default interface Support extends Document {
   description: string;
   reply?: string;
   atachement?: Blob; 
-  sender: User;
+  user: User;
   status: ResponseStatus;
   createdAt: Date;
   repliedAt?: Date;
@@ -36,7 +36,7 @@ const schema = new Schema(
       type: Schema.Types.String,
       required: true,
       default: ResponseStatus.PENDING,
-      enum: [ResponseStatus.CANCELED, ResponseStatus.DONE, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
+      enum: [ResponseStatus.CANCELED, ResponseStatus.CLOSED, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
     },
     reply: {
       type: Schema.Types.String,
@@ -44,7 +44,7 @@ const schema = new Schema(
       maxlength: 1000,
       default: null
     },
-    sender: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
@@ -75,4 +75,4 @@ const DOCUMENT_NAME = 'Support';
 const COLLECTION_NAME = 'support';
 
 
-export const RequestModel = model<Support>(DOCUMENT_NAME, schema, COLLECTION_NAME);
+export const SupportModel = model<Support>(DOCUMENT_NAME, schema, COLLECTION_NAME);

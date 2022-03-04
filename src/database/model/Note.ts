@@ -1,5 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 import Departement from './Department';
+import Network from './Network';
 import User from './User';
 
 
@@ -16,10 +17,11 @@ export default interface Note extends Document {
   title: string;
   description: string;
   atachement?: Blob; 
+  network: Network;
   createdBy: User;
   createdAt: Date;
   public: Boolean;
-  toDepartement?: Array<Departement>;
+  departements?: Departement[];
   type: NoteType;
   seenBy?: Array<User>;
 }
@@ -48,9 +50,21 @@ const schema = new Schema(
       required: true,
       index: true,
     },
+    network: {
+      type: Schema.Types.ObjectId,
+      ref: 'Network',
+      required: true,
+      index: true,
+    },
     createdAt: {
       type: Date,
       required: true
+    },
+    Departement: {
+      type: Schema.Types.ObjectId,
+      ref: 'Departement',
+      required: false,
+      index: true,
     },
     public: {
       type: Schema.Types.Boolean,

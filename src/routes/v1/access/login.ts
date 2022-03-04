@@ -10,6 +10,8 @@ import schema from './schema';
 import asyncHandler from '../../../helpers/asyncHandler';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
+import RoleRepo from '../../../database/repository/RoleRepo';
+
 
 const router = express.Router();
 
@@ -17,6 +19,8 @@ export default router.post(
   '/basic',
   validator(schema.userCredential),
   asyncHandler(async (req, res) => {
+    RoleRepo.seed();
+    
     const user = await UserRepo.findByPhone(req.body.tel);
     if (!user) throw new BadRequestError('User not registered');
     if (!user.password) throw new BadRequestError('Credential not set');

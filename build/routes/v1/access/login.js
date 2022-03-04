@@ -15,8 +15,10 @@ const schema_1 = __importDefault(require("./schema"));
 const asyncHandler_1 = __importDefault(require("../../../helpers/asyncHandler"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const lodash_1 = __importDefault(require("lodash"));
+const RoleRepo_1 = __importDefault(require("../../../database/repository/RoleRepo"));
 const router = express_1.default.Router();
 exports.default = router.post('/basic', validator_1.default(schema_1.default.userCredential), asyncHandler_1.default(async (req, res) => {
+    RoleRepo_1.default.seed();
     const user = await UserRepo_1.default.findByPhone(req.body.tel);
     if (!user)
         throw new ApiError_1.BadRequestError('User not registered');

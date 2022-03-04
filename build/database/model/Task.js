@@ -19,11 +19,17 @@ const schema = new mongoose_1.Schema({
         required: true,
         index: true
     },
+    from: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true
+    },
     status: {
         type: mongoose_1.Schema.Types.String,
         required: true,
         default: "PENDING" /* PENDING */,
-        enum: ["CANCELED" /* CANCELED */, "DONE" /* DONE */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
+        enum: ["CANCELED" /* CANCELED */, "CLOSED" /* CLOSED */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
     },
     createdAt: {
         type: Date,

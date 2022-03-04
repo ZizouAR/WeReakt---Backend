@@ -22,7 +22,7 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.String,
         required: true,
         default: "PENDING" /* PENDING */,
-        enum: ["CANCELED" /* CANCELED */, "DONE" /* DONE */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
+        enum: ["CANCELED" /* CANCELED */, "CLOSED" /* CLOSED */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */]
     },
     reply: {
         type: mongoose_1.Schema.Types.String,

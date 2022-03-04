@@ -4,21 +4,24 @@ import User from './User';
 
 
 export const enum MeetingStatus {
+  ON_SCHEDULE = "ON SCHEDULE",
   PENDING = 'PENDING',
   CANCELED = 'CANCELED',
   OVERDUE = 'OVERDUE',
-  DONE = 'DONE'
+  EXPIRED = 'EXPIRED'
 }
 
 
 export default interface Meeting extends Document {
   title: string;
   datetime: Date;
-  guests: Array<User>;
+  duration: Number;
+  guests: User[];
   createdBy: User;
   status: MeetingStatus;
   createdAt: Date;
   updatedAt?: Date;
+  expiresAt?: Date;
 }
 
 const schema = new Schema(
@@ -32,6 +35,11 @@ const schema = new Schema(
       type: Date,
       required: true
     },
+    duration: {
+      // minutes
+      type: Schema.Types.Number,
+      required: true
+    },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -39,7 +47,7 @@ const schema = new Schema(
       index: true
     },
     guests: {
-      type: Schema.Types.Array,
+      type: [Schema.Types.ObjectId],
       required: true
     },
     createdAt: {
@@ -49,7 +57,17 @@ const schema = new Schema(
     updatedAt: {
       type: Date,
       required: false
-    }
+    },
+    expiresAt: {
+      type: Date,
+      required: false
+    },
+    status: {
+      type: Schema.Types.String,
+      required: true,
+      default: MeetingStatus.ON_SCHEDULE,
+      enum: [MeetingStatus.CANCELED, MeetingStatus.EXPIRED, MeetingStatus.OVERDUE, MeetingStatus.PENDING, MeetingStatus.ON_SCHEDULE]
+    },
   },
   {
     versionKey: false,

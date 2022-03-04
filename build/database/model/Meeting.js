@@ -12,6 +12,11 @@ const schema = new mongoose_1.Schema({
         type: Date,
         required: true
     },
+    duration: {
+        // minutes
+        type: mongoose_1.Schema.Types.Number,
+        required: true
+    },
     createdBy: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
@@ -19,7 +24,7 @@ const schema = new mongoose_1.Schema({
         index: true
     },
     guests: {
-        type: mongoose_1.Schema.Types.Array,
+        type: [mongoose_1.Schema.Types.ObjectId],
         required: true
     },
     createdAt: {
@@ -29,7 +34,17 @@ const schema = new mongoose_1.Schema({
     updatedAt: {
         type: Date,
         required: false
-    }
+    },
+    expiresAt: {
+        type: Date,
+        required: false
+    },
+    status: {
+        type: mongoose_1.Schema.Types.String,
+        required: true,
+        default: "ON SCHEDULE" /* ON_SCHEDULE */,
+        enum: ["CANCELED" /* CANCELED */, "EXPIRED" /* EXPIRED */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */, "ON SCHEDULE" /* ON_SCHEDULE */]
+    },
 }, {
     versionKey: false,
 });

@@ -25,9 +25,21 @@ const schema = new mongoose_1.Schema({
         required: true,
         index: true,
     },
+    network: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Network',
+        required: true,
+        index: true,
+    },
     createdAt: {
         type: Date,
         required: true
+    },
+    Departement: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'Departement',
+        required: false,
+        index: true,
     },
     public: {
         type: mongoose_1.Schema.Types.Boolean,
@@ -50,4 +62,4 @@ const schema = new mongoose_1.Schema({
 const DOCUMENT_NAME = 'Note';
 const COLLECTION_NAME = 'notes';
 exports.NoteModel = mongoose_1.model(DOCUMENT_NAME, schema, COLLECTION_NAME);
-//# sourceMappingURL=Notes.js.map
+//# sourceMappingURL=Note.js.map

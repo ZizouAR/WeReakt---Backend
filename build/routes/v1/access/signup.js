@@ -27,11 +27,11 @@ router.post('/basic', uploadHandler_1.default.single('avatar'), validator_1.defa
     const accessTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     const refreshTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     USER.password = await bcrypt_1.default.hash(USER.password, 10);
-    const { user: createdUser, keystore } = await UserRepo_1.default.create(USER, accessTokenKey, refreshTokenKey, "WRITER" /* WRITER */);
+    const { user: createdUser, keystore } = await UserRepo_1.default.create(USER, accessTokenKey, refreshTokenKey, "ADMIN" /* ADMIN */);
     // @ATTACHEMENT
     if (attachement) {
         attachement.user = createdUser._id;
-        attachement.use = "PROFILE" /* PROFILE */;
+        attachement.as = "PROFILE" /* PROFILE */;
         // @SET PROFILE_PIC
         createdUser.picture = await AttachementRepo_1.default.upload(attachement);
         await UserRepo_1.default.updateInfo(createdUser);

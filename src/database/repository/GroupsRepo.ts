@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
 import Group, { GroupModel } from '../model/Group';
+import User from '../model/User';
 
 
 export default class GroupRepo {
@@ -18,5 +19,15 @@ export default class GroupRepo {
 
   public static findByGroup(group: Group): Promise<Group[]> {
     return GroupModel.find({ group }).lean<Group>().exec();
+  }
+
+
+  public static isGroupChat(_id: Types.ObjectId): Promise<Group | null> {
+    return GroupModel.findOne({ _id }).lean<Group>().exec();
+  }
+
+
+  public static isMember(group: Group, user: User): Boolean {
+    return group.members.includes(user);
   }
 }

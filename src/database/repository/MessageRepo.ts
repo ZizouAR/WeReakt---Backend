@@ -1,11 +1,11 @@
 import { Types } from 'mongoose';
+import { USER_DETAILS } from '../../config';
 import Message, { MessageModel } from '../model/Message';
 import User from '../model/User';
 
 
 export default class MessageRepo {
 
-  private static USER_DETAILS = 'name picture';
 
   public static async create(message: Message): Promise<Message> {
     message.createdAt = new Date();
@@ -21,7 +21,7 @@ export default class MessageRepo {
 
   public static read(sender: User, receiver: string): Promise<Message[]> {
     return MessageModel.find(sender, receiver)
-    .populate('sender', this.USER_DETAILS)
+    .populate('sender', USER_DETAILS)
     .sort('-createdAt')
     .limit(100)
     .lean<Message>()

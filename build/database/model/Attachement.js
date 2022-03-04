@@ -53,10 +53,10 @@ const schema = new mongoose_1.Schema({
         type: Date,
         required: true
     },
-    use: {
+    as: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        enum: ["PROFILE" /* PROFILE */, "REQUEST" /* REQUEST */, "SUPPORT" /* SUPPORT */, "CHAT" /* CHAT */]
+        enum: ["PROFILE" /* PROFILE */, "REQUEST" /* REQUEST */, "SUPPORT" /* SUPPORT */, "MESSAGE" /* MESSAGE */]
     },
 }, {
     versionKey: false,

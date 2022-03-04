@@ -6,7 +6,7 @@ export const enum ResponseStatus {
   PENDING = 'PENDING',
   CANCELED = 'CANCELED',
   OVERDUE = 'OVERDUE',
-  DONE = 'DONE'
+  CLOSED = 'CLOSED'
 }
 
 
@@ -47,7 +47,7 @@ const schema = new Schema(
       type: Schema.Types.String,
       required: true,
       default: ResponseStatus.PENDING,
-      enum: [ResponseStatus.CANCELED, ResponseStatus.DONE, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
+      enum: [ResponseStatus.CANCELED, ResponseStatus.CLOSED, ResponseStatus.OVERDUE, ResponseStatus.PENDING]
     },
     reply: {
       type: Schema.Types.String,

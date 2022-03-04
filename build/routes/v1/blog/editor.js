@@ -36,7 +36,7 @@ const role_1 = __importDefault(require("../../../helpers/role"));
 const router = express_1.default.Router();
 /*-------------------------------------------------------------------------*/
 // Below all APIs are private APIs protected for Access Token and Editor's Role
-router.use('/', authentication_1.default, role_1.default("EDITOR" /* EDITOR */), authorization_1.default);
+router.use('/', authentication_1.default, role_1.default("ADMIN" /* ADMIN */), authorization_1.default);
 /*-------------------------------------------------------------------------*/
 router.put('/publish/:id', validator_1.default(schema_1.default.blogId, validator_1.ValidationSource.PARAM), asyncHandler_1.default(async (req, res) => {
     const blog = await BlogRepo_1.default.findBlogAllDataById(new mongoose_1.Types.ObjectId(req.params.id));

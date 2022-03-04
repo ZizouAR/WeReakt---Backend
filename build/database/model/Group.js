@@ -8,7 +8,7 @@ const schema = new mongoose_1.Schema({
         required: true,
         maxlength: 300
     },
-    users: {
+    members: {
         type: mongoose_1.Schema.Types.Array,
         required: true
     },

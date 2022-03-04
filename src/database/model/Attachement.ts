@@ -2,16 +2,17 @@ import { Schema, model, Document } from 'mongoose';
 import User from './User';
 
 
-export const enum AttachementUse {
+export const enum AttachementAs {
   PROFILE = 'PROFILE',
   REQUEST = 'REQUEST',
-  CHAT = 'CHAT',
+  MESSAGE = 'MESSAGE',
   SUPPORT = 'SUPPORT'
 }
 
 
 
 export default interface Attachement extends Document {
+  _id: string;
   user: User;
   fieldname?: string;
   originalname?: string;
@@ -23,7 +24,7 @@ export default interface Attachement extends Document {
   path?: string,
   buffer: number,
   createdAt: Date,
-  use: AttachementUse
+  as: AttachementAs
 }
 
 
@@ -80,10 +81,10 @@ const schema = new Schema(
       type: Date,
       required: true
     },
-    use: {
+    as: {
       type: Schema.Types.String,
       required: true,
-      enum: [AttachementUse.PROFILE, AttachementUse.REQUEST, AttachementUse.SUPPORT, AttachementUse.CHAT]
+      enum: [AttachementAs.PROFILE, AttachementAs.REQUEST, AttachementAs.SUPPORT, AttachementAs.MESSAGE]
     },
   },
   {

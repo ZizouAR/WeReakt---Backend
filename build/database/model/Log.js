@@ -61,7 +61,7 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.Boolean,
         required: true
     },
-    datetime: {
+    createdAt: {
         type: Date,
         required: true
     }

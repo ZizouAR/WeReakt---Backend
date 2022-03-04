@@ -16,6 +16,7 @@ export const db = {
 export const CORS_URL = process.env.CORS_URL;
 export const UPLOAD_SIZE_LIMIT = process.env.UPLOAD_SIZE_LIMIT;
 
+export const USER_DETAILS = process.env.USER_DETAILS;
 
 export const TOKEN_INFO = {
   accessTokenValidityDays: parseInt(process.env.ACCESS_TOKEN_VALIDITY_DAYS || '0'),

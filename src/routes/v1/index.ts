@@ -9,6 +9,7 @@ import blogDetail from './blog/blogDetail';
 import writer from './blog/writer';
 import editor from './blog/editor';
 import user from './profile/user';
+import message from './message';
 
 const router = express.Router();
 
@@ -26,5 +27,7 @@ router.use('/blog', blogDetail);
 router.use('/writer/blog', writer);
 router.use('/editor/blog', editor);
 router.use('/profile', user);
+router.use('/message', message);
+
 
 export default router;

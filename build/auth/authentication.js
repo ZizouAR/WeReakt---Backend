@@ -32,7 +32,6 @@ const authUtils_1 = require("./authUtils");
 const validator_1 = __importStar(require("../helpers/validator"));
 const schema_1 = __importDefault(require("./schema"));
 const asyncHandler_1 = __importDefault(require("../helpers/asyncHandler"));
-const Logger_1 = __importDefault(require("../core/Logger"));
 const router = express_1.default.Router();
 exports.default = router.use(validator_1.default(schema_1.default.auth, validator_1.ValidationSource.HEADER), asyncHandler_1.default(async (req, res, next) => {
     req.accessToken = authUtils_1.getAccessToken(req.headers.authorization); // Express headers are auto converted to lowercase
@@ -43,8 +42,6 @@ exports.default = router.use(validator_1.default(schema_1.default.auth, validato
         if (!user)
             throw new ApiError_1.AuthFailureError('User not registered');
         req.user = user;
-        Logger_1.default.info("AUTH req.user = ");
-        Logger_1.default.info(req.user);
         const keystore = await KeystoreRepo_1.default.findforKey(req.user._id, payload.prm);
         if (!keystore)
             throw new ApiError_1.AuthFailureError('Invalid access token');

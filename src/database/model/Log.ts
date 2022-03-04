@@ -29,7 +29,7 @@ export default interface Log extends Document {
   user_agent: string;
   isEmulator?: boolean;
   isLocationEnabled: boolean;
-  datetime: Date;
+  createdAt: Date;
 }
 
 const schema = new Schema(
@@ -92,7 +92,7 @@ const schema = new Schema(
       type: Schema.Types.Boolean,
       required: true
     },
-    datetime: {
+    createdAt: {
       type: Date,
       required: true
     }

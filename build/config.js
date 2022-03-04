@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOG_DIR = exports.TOKEN_INFO = exports.UPLOAD_SIZE_LIMIT = exports.CORS_URL = exports.db = exports.port = exports.environment = void 0;
+exports.LOG_DIR = exports.TOKEN_INFO = exports.USER_DETAILS = exports.UPLOAD_SIZE_LIMIT = exports.CORS_URL = exports.db = exports.port = exports.environment = void 0;
 // Mapper for environment variables
 exports.environment = process.env.NODE_ENV;
 exports.port = process.env.PORT;
@@ -14,6 +14,7 @@ exports.db = {
 };
 exports.CORS_URL = process.env.CORS_URL;
 exports.UPLOAD_SIZE_LIMIT = process.env.UPLOAD_SIZE_LIMIT;
+exports.USER_DETAILS = process.env.USER_DETAILS;
 exports.TOKEN_INFO = {
     accessTokenValidityDays: parseInt(process.env.ACCESS_TOKEN_VALIDITY_DAYS || '0'),
     refreshTokenValidityDays: parseInt(process.env.ACCESS_TOKEN_VALIDITY_DAYS || '0'),

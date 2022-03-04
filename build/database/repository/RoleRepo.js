@@ -7,10 +7,9 @@ class RoleRepo {
     }
     static seed() {
         return Role_1.RoleModel.insertMany([
-            { code: 'LEARNER', status: true, createdAt: new Date(), updatedAt: new Date() },
-            { code: 'WRITER', status: true, createdAt: new Date(), updatedAt: new Date() },
-            { code: 'EDITOR', status: true, createdAt: new Date(), updatedAt: new Date() },
-            { code: 'ADMIN', status: true, createdAt: new Date(), updatedAt: new Date() },
+            { code: "ADMIN" /* ADMIN */, status: true, createdAt: new Date(), updatedAt: new Date() },
+            { code: "MODERATOR" /* MODERATOR */, status: true, createdAt: new Date(), updatedAt: new Date() },
+            { code: "OWNER" /* OWNER */, status: true, createdAt: new Date(), updatedAt: new Date() }
         ]);
     }
 }

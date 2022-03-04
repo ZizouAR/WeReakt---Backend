@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import Attachement, { AttachementModel, AttachementUse } from '../model/Attachement';
+import Attachement, { AttachementModel, AttachementAs } from '../model/Attachement';
 
 const sharp = require("sharp");
 
@@ -11,7 +11,7 @@ export default class AttachementRepo {
     attachement.createdAt = new Date();
 
     // @resize 250x250
-    if(attachement.use == AttachementUse.PROFILE){
+    if(attachement.as == AttachementAs.PROFILE){
       attachement.buffer = await sharp(attachement.buffer)
       .resize({ width: 250, height: 250 })
       .png()

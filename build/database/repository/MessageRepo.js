@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const config_1 = require("../../config");
 const Message_1 = require("../model/Message");
 class MessageRepo {
     static async create(message) {
@@ -12,7 +13,7 @@ class MessageRepo {
     }
     static read(sender, receiver) {
         return Message_1.MessageModel.find(sender, receiver)
-            .populate('sender', this.USER_DETAILS)
+            .populate('sender', config_1.USER_DETAILS)
             .sort('-createdAt')
             .limit(100)
             .lean()
@@ -20,5 +21,4 @@ class MessageRepo {
     }
 }
 exports.default = MessageRepo;
-MessageRepo.USER_DETAILS = 'name picture';
 //# sourceMappingURL=MessageRepo.js.map

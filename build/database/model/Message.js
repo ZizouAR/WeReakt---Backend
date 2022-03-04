@@ -33,10 +33,10 @@ const schema = new mongoose_1.Schema({
         required: true,
         default: false,
     },
-    type: {
-        type: mongoose_1.Schema.Types.String,
+    hasAttachement: {
+        type: mongoose_1.Schema.Types.Boolean,
         required: true,
-        default: "TEXT" /* TEXT */
+        default: false
     },
     seen: {
         type: mongoose_1.Schema.Types.Boolean,

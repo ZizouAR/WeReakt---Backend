@@ -11,7 +11,7 @@ export const enum Permission {
 
 export default interface Group extends Document {
   name: string;
-  users: Array<User>;
+  members: User[];
   private: boolean;
   createdAt: Date;
   createdBy: User;
@@ -26,7 +26,7 @@ const schema = new Schema(
       required: true,
       maxlength: 300
     },
-    users: {
+    members: {
       type: Schema.Types.Array,
       required: true
     },

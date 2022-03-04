@@ -14,6 +14,7 @@ const blogDetail_1 = __importDefault(require("./blog/blogDetail"));
 const writer_1 = __importDefault(require("./blog/writer"));
 const editor_1 = __importDefault(require("./blog/editor"));
 const user_1 = __importDefault(require("./profile/user"));
+const message_1 = __importDefault(require("./message"));
 const router = express_1.default.Router();
 /*-------------------------------------------------------------------------*/
 // Below all APIs are public APIs protected by api-key
@@ -28,5 +29,6 @@ router.use('/blog', blogDetail_1.default);
 router.use('/writer/blog', writer_1.default);
 router.use('/editor/blog', editor_1.default);
 router.use('/profile', user_1.default);
+router.use('/message', message_1.default);
 exports.default = router;
 //# sourceMappingURL=index.js.map

@@ -17,7 +17,7 @@ const router = express.Router();
 
 /*-------------------------------------------------------------------------*/
 // Below all APIs are private APIs protected for writer's role
-router.use('/', authentication, role(RoleCode.WRITER), authorization);
+router.use('/', authentication, role(RoleCode.ADMIN), authorization);
 /*-------------------------------------------------------------------------*/
 
 const formatEndpoint = (endpoint: string) => endpoint.replace(/\s/g, '').replace(/\//g, '-');
@@ -27,7 +27,7 @@ router.post(
   validator(schema.blogCreate),
   asyncHandler(async (req: ProtectedRequest, res) => {
     req.body.blogUrl = formatEndpoint(req.body.blogUrl);
-
+    
     const blog = await BlogRepo.findUrlIfExists(req.body.blogUrl);
     if (blog) throw new BadRequestError('Blog with this url already exists');
 
