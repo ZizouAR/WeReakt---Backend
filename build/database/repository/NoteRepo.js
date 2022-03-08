@@ -12,15 +12,15 @@ class NoteRepo {
         return Note_1.NoteModel.findByIdAndRemove(id).lean().exec();
     }
     static findRecentByNetwork(network) {
-        return Note_1.NoteModel.find(network)
+        return Note_1.NoteModel.find({ network })
             .populate('createdBy', config_1.USER_DETAILS)
             .sort('-createdAt')
             .limit(10)
             .lean()
             .exec();
     }
-    static findPrivateByDepartement(departement) {
-        return Note_1.NoteModel.find(departement)
+    static findRecentByDepartement(departement) {
+        return Note_1.NoteModel.find({ departement })
             .populate('createdBy', config_1.USER_DETAILS)
             .sort('-createdAt')
             .limit(10)
@@ -29,4 +29,4 @@ class NoteRepo {
     }
 }
 exports.default = NoteRepo;
-//# sourceMappingURL=NotesRepo.js.map
+//# sourceMappingURL=NoteRepo.js.map

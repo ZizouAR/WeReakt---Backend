@@ -1,6 +1,5 @@
 import { Types } from 'mongoose';
 import Hierarchy, { HierarchyModel } from '../model/Hierarchy';
-import Network from '../model/Network';
 
 
 export default class HierarchyRepo {
@@ -14,8 +13,8 @@ export default class HierarchyRepo {
   }
 
 
-  public static findByNetwork(network: Network): Promise<Hierarchy[]> {
-    return HierarchyModel.find({ network }).lean<Hierarchy>().exec();
+  public static findByNetwork(id: Types.ObjectId): Promise<Hierarchy | null> {
+    return HierarchyModel.findById(id).lean<Hierarchy>().exec();
   }
 }
 

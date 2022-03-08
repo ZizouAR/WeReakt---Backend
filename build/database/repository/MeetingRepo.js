@@ -23,6 +23,13 @@ class MeetingRepo {
             .lean()
             .exec();
     }
+    static findById(id) {
+        return Meeting_1.MeetingModel.findById(id).lean().exec();
+    }
+    static async isCreator(user, meeting_id) {
+        var meeting = await this.findById(meeting_id);
+        return user._id == (meeting === null || meeting === void 0 ? void 0 : meeting.createdBy);
+    }
     static findRecent(User) {
         return Meeting_1.MeetingModel.find({ guests: User })
             .populate('createdBy', config_1.USER_DETAILS)

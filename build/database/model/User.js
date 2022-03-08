@@ -25,13 +25,13 @@ const schema = new mongoose_1.Schema({
     job: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Job',
-        required: false,
+        required: true,
         index: true,
     },
     network: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'Network',
-        required: false,
+        required: true,
         index: true,
     },
     tel: {

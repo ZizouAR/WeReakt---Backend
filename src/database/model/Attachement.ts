@@ -6,7 +6,8 @@ export const enum AttachementAs {
   PROFILE = 'PROFILE',
   REQUEST = 'REQUEST',
   MESSAGE = 'MESSAGE',
-  SUPPORT = 'SUPPORT'
+  SUPPORT = 'SUPPORT',
+  NOTE = 'NOTE'
 }
 
 
@@ -84,7 +85,7 @@ const schema = new Schema(
     as: {
       type: Schema.Types.String,
       required: true,
-      enum: [AttachementAs.PROFILE, AttachementAs.REQUEST, AttachementAs.SUPPORT, AttachementAs.MESSAGE]
+      enum: [AttachementAs.PROFILE, AttachementAs.REQUEST, AttachementAs.SUPPORT, AttachementAs.MESSAGE, AttachementAs.NOTE]
     },
   },
   {

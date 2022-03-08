@@ -4,7 +4,7 @@ import { RoleRequest } from 'app-request';
 import crypto from 'crypto';
 import UserRepo from '../../../database/repository/UserRepo';
 import AttachementRepo from '../../../database/repository/AttachementRepo';
-import { BadRequestError } from '../../../core/ApiError';
+import { BadRequestError, NotFoundError } from '../../../core/ApiError';
 import User from '../../../database/model/User';
 import { AttachementAs } from '../../../database/model/Attachement';
 import { createTokens } from '../../../auth/authUtils';
@@ -15,6 +15,7 @@ import bcrypt from 'bcrypt';
 import _ from 'lodash';
 import { RoleCode } from '../../../database/model/Role';
 import upload from '../../../helpers/uploadHandler';
+import JobRepo from '../../../database/repository/JobRepo';
 
 
 const router = express.Router();
@@ -31,6 +32,7 @@ router.post(
     const attachement = req.file;
     const user = await UserRepo.findByPhone(USER.tel);
     if (user) throw new BadRequestError('User already registered');
+    if(!(await JobRepo.findById(req.body.job))) throw new NotFoundError("Job not found");
 
 
     const accessTokenKey = crypto.randomBytes(64).toString('hex');

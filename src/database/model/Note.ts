@@ -4,7 +4,7 @@ import Network from './Network';
 import User from './User';
 
 
-export const enum NoteType {
+export enum NoteType {
   URGENT = 'URGENT',
   ALERT = 'ALERT',
   DISCLAIMER = 'DISCLAIMER',
@@ -20,8 +20,8 @@ export default interface Note extends Document {
   network: Network;
   createdBy: User;
   createdAt: Date;
-  public: Boolean;
-  departements?: Departement[];
+  private: Boolean;
+  departement?: Departement;
   type: NoteType;
   seenBy?: Array<User>;
 }
@@ -66,7 +66,7 @@ const schema = new Schema(
       required: false,
       index: true,
     },
-    public: {
+    private: {
       type: Schema.Types.Boolean,
       required: true,
       default: false,

@@ -1,7 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NoteModel = void 0;
+exports.NoteModel = exports.NoteType = void 0;
 const mongoose_1 = require("mongoose");
+var NoteType;
+(function (NoteType) {
+    NoteType["URGENT"] = "URGENT";
+    NoteType["ALERT"] = "ALERT";
+    NoteType["DISCLAIMER"] = "DISCLAIMER";
+    NoteType["EVENT"] = "EVENT";
+    NoteType["IMPORTANT"] = "IMPORTANT";
+})(NoteType = exports.NoteType || (exports.NoteType = {}));
 const schema = new mongoose_1.Schema({
     title: {
         type: mongoose_1.Schema.Types.String,
@@ -41,7 +49,7 @@ const schema = new mongoose_1.Schema({
         required: false,
         index: true,
     },
-    public: {
+    private: {
         type: mongoose_1.Schema.Types.Boolean,
         required: true,
         default: false,
@@ -49,8 +57,8 @@ const schema = new mongoose_1.Schema({
     type: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        default: "DISCLAIMER" /* DISCLAIMER */,
-        enum: ["ALERT" /* ALERT */, "DISCLAIMER" /* DISCLAIMER */, "EVENT" /* EVENT */, "IMPORTANT" /* IMPORTANT */, "URGENT" /* URGENT */]
+        default: NoteType.DISCLAIMER,
+        enum: [NoteType.ALERT, NoteType.DISCLAIMER, NoteType.EVENT, NoteType.IMPORTANT, NoteType.URGENT]
     },
     seenBy: {
         type: Array,

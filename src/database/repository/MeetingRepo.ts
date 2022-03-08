@@ -7,6 +7,7 @@ import User from '../model/User';
 
 export default class MeetingRepo {
 
+  
   public static async create(meeting: Meeting): Promise<Meeting> {
     meeting.createdAt = new Date();
     meeting.expiresAt = new Date(); 
@@ -21,9 +22,11 @@ export default class MeetingRepo {
   } 
 
 
+
   public static remove(id: Types.ObjectId): Promise<Meeting | null> {
     return MeetingModel.findByIdAndRemove(id).lean<Meeting>().exec();
   }
+
 
 
   public static update(meeting: Meeting): Promise<any> {
@@ -32,6 +35,21 @@ export default class MeetingRepo {
       .lean()
       .exec();
   }
+
+
+
+  public static findById(id: Types.ObjectId): Promise<Meeting | null> {
+    return MeetingModel.findById(id).lean<Meeting>().exec();
+  }
+
+
+
+  public static async isCreator(user: User, meeting_id: Types.ObjectId): Promise<Boolean> {
+    var meeting = await this.findById(meeting_id);
+    return user._id == meeting?.createdBy;
+  }
+
+
 
   public static findRecent(User: User): Promise<Meeting[]> {
     return MeetingModel.find({ guests: User })

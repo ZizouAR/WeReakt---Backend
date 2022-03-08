@@ -9,13 +9,23 @@ const schema = new mongoose_1.Schema({
         maxlength: 300
     },
     members: {
-        type: mongoose_1.Schema.Types.Array,
-        required: true
-    },
-    private: {
-        type: mongoose_1.Schema.Types.Boolean,
+        type: [
+            {
+                type: mongoose_1.Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
         required: true,
-        default: false,
+        default: []
+    },
+    invited: {
+        type: [
+            {
+                type: mongoose_1.Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
+        required: true
     },
     createdAt: {
         type: Date,

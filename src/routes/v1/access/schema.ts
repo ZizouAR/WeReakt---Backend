@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi';
-import { JoiAuthBearer } from '../../../helpers/validator';
+import { JoiAuthBearer, JoiObjectId } from '../../../helpers/validator';
+
 
 export default {
   userCredential: Joi.object().keys({
@@ -18,6 +19,8 @@ export default {
   signup: Joi.object().keys({
     firstname: Joi.string().required().min(3),
     lastname: Joi.string().required().min(3),
+    job: JoiObjectId().required(),
+    network: JoiObjectId().required(),
     //email: Joi.string().required().email(),
     password: Joi.string().required().min(6),
     picture: Joi.string().optional().uri(),

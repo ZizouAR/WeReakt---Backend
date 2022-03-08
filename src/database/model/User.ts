@@ -10,9 +10,9 @@ export default interface User extends Document {
   firstname?: string;
   lastname?: string;
   name?: string;
-  network?: Network;
+  network: Network;
   tel: number;
-  job?: Job;
+  job: Job;
   password?: string;
   otp?: string;
   picture?: Attachement;
@@ -47,13 +47,13 @@ const schema = new Schema(
     job: {
       type: Schema.Types.ObjectId,
       ref: 'Job',
-      required: false,
+      required: true,
       index: true,
     },
     network: {
       type: Schema.Types.ObjectId,
       ref: 'Network',
-      required: false,
+      required: true,
       index: true,
     },
     tel: {

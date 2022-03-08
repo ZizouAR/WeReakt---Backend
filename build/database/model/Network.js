@@ -1,7 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NetworkModel = void 0;
+exports.NetworkModel = exports.EMPLOYEES_NUM = exports.ANNUEL_REVENUE = exports.INDUSTRIES = void 0;
 const mongoose_1 = require("mongoose");
+var INDUSTRIES;
+(function (INDUSTRIES) {
+    INDUSTRIES["ADVERTISING"] = "ADVERTISING";
+    INDUSTRIES["MARKETING"] = "MARKETING";
+    INDUSTRIES["TECHNOLOGY"] = "TECHNOLOGY";
+    INDUSTRIES["HEALTH"] = "HEALTH";
+    INDUSTRIES["FOOD"] = "FOOD";
+    INDUSTRIES["ENTERTAINEMENT"] = "ENTERTAINEMENT";
+    INDUSTRIES["PRODUCTION"] = "PRODUCTION";
+})(INDUSTRIES = exports.INDUSTRIES || (exports.INDUSTRIES = {}));
+var ANNUEL_REVENUE;
+(function (ANNUEL_REVENUE) {
+    ANNUEL_REVENUE["$0_10K"] = "$0 - $10K";
+    ANNUEL_REVENUE["$10K_25K"] = "$10K - $25K";
+    ANNUEL_REVENUE["$25K_50K"] = "$25K - $50K";
+    ANNUEL_REVENUE["$50K_100K"] = "$50K - $100K";
+    ANNUEL_REVENUE["$100k_plus"] = "$+100k";
+})(ANNUEL_REVENUE = exports.ANNUEL_REVENUE || (exports.ANNUEL_REVENUE = {}));
+var EMPLOYEES_NUM;
+(function (EMPLOYEES_NUM) {
+    EMPLOYEES_NUM["_0_10"] = "0 - 10";
+    EMPLOYEES_NUM["_10_25"] = "10 - 25";
+    EMPLOYEES_NUM["_25_100"] = "25 - 100";
+    EMPLOYEES_NUM["_100_500"] = "100 - 500";
+    EMPLOYEES_NUM["_1000_plus"] = "+1000";
+})(EMPLOYEES_NUM = exports.EMPLOYEES_NUM || (exports.EMPLOYEES_NUM = {}));
 const schema = new mongoose_1.Schema({
     name: {
         type: mongoose_1.Schema.Types.String,
@@ -32,35 +58,35 @@ const schema = new mongoose_1.Schema({
         type: mongoose_1.Schema.Types.String,
         required: true,
         enum: [
-            "ADVERTISING" /* ADVERTISING */,
-            "ENTERTAINEMENT" /* ENTERTAINEMENT */,
-            "FOOD" /* FOOD */,
-            "HEALTH" /* HEALTH */,
-            "MARKETING" /* MARKETING */,
-            "PRODUCTION" /* PRODUCTION */,
-            "TECHNOLOGY" /* TECHNOLOGY */
+            INDUSTRIES.ADVERTISING,
+            INDUSTRIES.ENTERTAINEMENT,
+            INDUSTRIES.FOOD,
+            INDUSTRIES.HEALTH,
+            INDUSTRIES.MARKETING,
+            INDUSTRIES.PRODUCTION,
+            INDUSTRIES.TECHNOLOGY
         ]
     },
     annual_revenue: {
         type: mongoose_1.Schema.Types.String,
         required: false,
         enum: [
-            "$0 - $10K" /* $0_10K */,
-            "$10K - $25K" /* $10K_25K */,
-            "$25K - $50K" /* $25K_50K */,
-            "$50K - $100K" /* $50K_100K */,
-            "$+100k" /* $100k_plus */
+            ANNUEL_REVENUE.$0_10K,
+            ANNUEL_REVENUE.$10K_25K,
+            ANNUEL_REVENUE.$25K_50K,
+            ANNUEL_REVENUE.$50K_100K,
+            ANNUEL_REVENUE.$100k_plus
         ]
     },
     employees_num: {
         type: mongoose_1.Schema.Types.String,
         required: false,
         enum: [
-            "0 - 10" /* _0_10 */,
-            "10 - 25" /* _10_25 */,
-            "25 - 100" /* _25_100 */,
-            "100 - 500" /* _100_500 */,
-            "+1000" /* _1000_plus */
+            EMPLOYEES_NUM._0_10,
+            EMPLOYEES_NUM._10_25,
+            EMPLOYEES_NUM._25_100,
+            EMPLOYEES_NUM._100_500,
+            EMPLOYEES_NUM._1000_plus
         ]
     },
 }, {

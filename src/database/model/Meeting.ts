@@ -3,7 +3,7 @@ import User from './User';
 
 
 
-export const enum MeetingStatus {
+export enum MeetingStatus {
   ON_SCHEDULE = "ON SCHEDULE",
   PENDING = 'PENDING',
   CANCELED = 'CANCELED',

@@ -12,7 +12,7 @@ export const enum Permission {
 export default interface Group extends Document {
   name: string;
   members: User[];
-  private: boolean;
+  invited: User[];
   createdAt: Date;
   createdBy: User;
   updatedAt?: Date;
@@ -27,13 +27,23 @@ const schema = new Schema(
       maxlength: 300
     },
     members: {
-      type: Schema.Types.Array,
-      required: true
-    },
-    private: {
-      type: Schema.Types.Boolean,
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
       required: true,
-      default: false,
+      default: []
+    },
+    invited: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
+      required: true
     },
     createdAt: {
       type: Date,

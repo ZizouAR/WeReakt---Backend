@@ -8,8 +8,8 @@ class HierarchyRepo {
             .lean()
             .exec();
     }
-    static findByNetwork(network) {
-        return Hierarchy_1.HierarchyModel.find({ network }).lean().exec();
+    static findByNetwork(id) {
+        return Hierarchy_1.HierarchyModel.findById(id).lean().exec();
     }
 }
 exports.default = HierarchyRepo;

@@ -1,7 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MeetingModel = void 0;
+exports.MeetingModel = exports.MeetingStatus = void 0;
 const mongoose_1 = require("mongoose");
+var MeetingStatus;
+(function (MeetingStatus) {
+    MeetingStatus["ON_SCHEDULE"] = "ON SCHEDULE";
+    MeetingStatus["PENDING"] = "PENDING";
+    MeetingStatus["CANCELED"] = "CANCELED";
+    MeetingStatus["OVERDUE"] = "OVERDUE";
+    MeetingStatus["EXPIRED"] = "EXPIRED";
+})(MeetingStatus = exports.MeetingStatus || (exports.MeetingStatus = {}));
 const schema = new mongoose_1.Schema({
     title: {
         type: mongoose_1.Schema.Types.String,
@@ -42,8 +50,8 @@ const schema = new mongoose_1.Schema({
     status: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        default: "ON SCHEDULE" /* ON_SCHEDULE */,
-        enum: ["CANCELED" /* CANCELED */, "EXPIRED" /* EXPIRED */, "OVERDUE" /* OVERDUE */, "PENDING" /* PENDING */, "ON SCHEDULE" /* ON_SCHEDULE */]
+        default: MeetingStatus.ON_SCHEDULE,
+        enum: [MeetingStatus.CANCELED, MeetingStatus.EXPIRED, MeetingStatus.OVERDUE, MeetingStatus.PENDING, MeetingStatus.ON_SCHEDULE]
     },
 }, {
     versionKey: false,

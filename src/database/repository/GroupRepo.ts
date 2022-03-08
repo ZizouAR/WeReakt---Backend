@@ -17,8 +17,8 @@ export default class GroupRepo {
     return GroupModel.findByIdAndRemove(id).lean<Group>().exec();
   }
 
-  public static findByGroup(group: Group): Promise<Group[]> {
-    return GroupModel.find({ group }).lean<Group>().exec();
+  public static find(user: User): Promise<Group[]> {
+    return GroupModel.find({ members: user }).lean<Group>().exec();
   }
 
 
@@ -29,5 +29,11 @@ export default class GroupRepo {
 
   public static isMember(group: Group, user: User): Boolean {
     return group.members.includes(user);
+  }
+
+
+  public static update(group: Group): Promise<Group | null> {
+    group.updatedAt = new Date();
+    return GroupModel.findByIdAndUpdate(group._id, { group }).lean<Group>().exec();
   }
 }

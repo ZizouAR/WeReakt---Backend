@@ -7,6 +7,8 @@ import Keystore from '../model/Keystore';
 
 export default class UserRepo {
   
+
+
   // contains critical information of the user
   public static findById(id: Types.ObjectId): Promise<User | null> {
     return UserModel.findOne({ _id: id, verified: true })
@@ -19,6 +21,9 @@ export default class UserRepo {
       .exec();
   }
 
+
+
+
   public static findByPhone(tel: number): Promise<User | null> {
     return UserModel.findOne({ tel, verified: true })
       .select('+tel +password +roles')
@@ -30,6 +35,9 @@ export default class UserRepo {
       .lean<User>()
       .exec();
   }
+
+
+
 
   public static findProfileById(id: Types.ObjectId): Promise<User | null> {
     return UserModel.findOne({ _id: id, verified: true })
@@ -47,6 +55,9 @@ export default class UserRepo {
     return UserModel.findOne({ _id: id, verified: true }).lean<User>().exec();
   }
 
+
+
+
   public static async create(
     user: User,
     accessTokenKey: string,
@@ -55,7 +66,6 @@ export default class UserRepo {
   ): Promise<{ user: User; keystore: Keystore }> {
 
     const role = await RoleModel.findOne({ code: roleCode }).lean<Role>().exec();
-
     if (!role) throw new InternalError('Role must be defined');
 
     user.roles = [role._id];
@@ -66,6 +76,8 @@ export default class UserRepo {
     const keystore = await KeystoreRepo.create(createdUser._id, accessTokenKey, refreshTokenKey);
     return { user: createdUser.toObject(), keystore: keystore };
   }
+
+
 
   public static async update(
     user: User,
@@ -79,6 +91,9 @@ export default class UserRepo {
     const keystore = await KeystoreRepo.create(user._id, accessTokenKey, refreshTokenKey);
     return { user: user, keystore: keystore };
   }
+
+
+  
 
   public static updateInfo(user: User): Promise<any> {
     user.updatedAt = new Date();

@@ -17,10 +17,6 @@ const schema = new mongoose_1.Schema({
     createdAt: {
         type: Date,
         required: true
-    },
-    updatedAt: {
-        type: Date,
-        required: false
     }
 }, {
     versionKey: false,

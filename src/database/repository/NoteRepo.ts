@@ -10,7 +10,6 @@ export default class NoteRepo {
 
   public static async create(note: Note): Promise<Note> {
     note.createdAt = new Date();
-    
     const note_ = await NoteModel.create(note);
     return note_.toObject();
   } 
@@ -22,9 +21,19 @@ export default class NoteRepo {
   }
 
 
-
   public static findRecentByNetwork(network: Network): Promise<Note[]> {
-    return NoteModel.find(network)
+    return NoteModel.find({network})
+    .populate('createdBy', USER_DETAILS)
+    .sort('-createdAt')
+    .limit(10)
+    .lean<Note>()
+    .exec();
+  }
+  
+
+
+  public static findRecentByDepartement(departement: Departement): Promise<Note[]> {
+    return NoteModel.find({departement})
     .populate('createdBy', USER_DETAILS)
     .sort('-createdAt')
     .limit(10)
@@ -32,15 +41,5 @@ export default class NoteRepo {
     .exec();
   }
 
-
-
-  public static findPrivateByDepartement(departement: Departement): Promise<Note[]> {
-    return NoteModel.find(departement)
-    .populate('createdBy', USER_DETAILS)
-    .sort('-createdAt')
-    .limit(10)
-    .lean<Note>()
-    .exec();
-  }
 }
 

@@ -6,7 +6,7 @@ import User from './User';
 
 export default interface Message extends Document {
   message: string;
-  atachement?: Attachement; 
+  attachement?: Attachement; 
   sender: User;
   receiver: string;
   isGroupeChat?: boolean;
@@ -25,10 +25,10 @@ const schema = new Schema(
       trim: true,
       default: ""
     },
-    atachement: {
+    attachement: {
       // max 16mb
       type: Schema.Types.ObjectId,
-      ref: 'Atachement',
+      ref: 'Attachement',
       required: false,
       index: true,
     },

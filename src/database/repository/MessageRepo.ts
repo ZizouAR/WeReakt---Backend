@@ -7,6 +7,12 @@ import User from '../model/User';
 export default class MessageRepo {
 
 
+  /**
+   * Creates message
+   * @param message 
+   * @returns Message 
+   */
+
   public static async create(message: Message): Promise<Message> {
     message.createdAt = new Date();
     const msg = await MessageModel.create(message);
@@ -14,10 +20,23 @@ export default class MessageRepo {
   } 
 
 
+  /**
+   * Removes message
+   * @param id 
+   * @returns Message | null 
+   */
+
   public static remove(id: Types.ObjectId): Promise<Message | null> {
     return MessageModel.findByIdAndRemove(id).lean<Message>().exec();
   }
 
+
+  /**
+   * Reads message
+   * @param sender 
+   * @param receiver 
+   * @returns Message[] 
+   */
 
   public static read(sender: User, receiver: string): Promise<Message[]> {
     return MessageModel.find(sender, receiver)

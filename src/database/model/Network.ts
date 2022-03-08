@@ -3,7 +3,7 @@ import User from './User';
 
 
 
-export const enum INDUSTRIES {
+export enum INDUSTRIES {
   ADVERTISING = 'ADVERTISING',
   MARKETING = 'MARKETING',
   TECHNOLOGY = 'TECHNOLOGY',
@@ -14,7 +14,7 @@ export const enum INDUSTRIES {
 }
 
 
-export const enum ANNUEL_REVENUE {
+export enum ANNUEL_REVENUE {
   $0_10K = '$0 - $10K',
   $10K_25K = '$10K - $25K',
   $25K_50K = '$25K - $50K',
@@ -23,7 +23,7 @@ export const enum ANNUEL_REVENUE {
 }
 
 
-export const enum EMPLOYEES_NUM {
+export enum EMPLOYEES_NUM {
   _0_10 = '0 - 10',
   _10_25 = '10 - 25',
   _25_100 = '25 - 100',

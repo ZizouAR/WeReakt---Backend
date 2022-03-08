@@ -9,7 +9,7 @@ const schema = new mongoose_1.Schema({
         maxlength: 200
     },
     description: {
-        type: Date,
+        type: String,
         required: false,
         maxlength: 500
     },

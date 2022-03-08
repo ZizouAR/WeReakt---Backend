@@ -11,8 +11,8 @@ class NetworkRepo {
     static remove(id) {
         return Network_1.NetworkModel.findByIdAndRemove(id).lean().exec();
     }
-    static findByNetwork(network) {
-        return Network_1.NetworkModel.find({ network }).lean().exec();
+    static find(id) {
+        return Network_1.NetworkModel.findById(id).lean().exec();
     }
 }
 exports.default = NetworkRepo;

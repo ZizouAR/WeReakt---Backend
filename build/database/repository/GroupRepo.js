@@ -11,8 +11,8 @@ class GroupRepo {
     static remove(id) {
         return Group_1.GroupModel.findByIdAndRemove(id).lean().exec();
     }
-    static findByGroup(group) {
-        return Group_1.GroupModel.find({ group }).lean().exec();
+    static find(user) {
+        return Group_1.GroupModel.find({ members: user }).lean().exec();
     }
     static isGroupChat(_id) {
         return Group_1.GroupModel.findOne({ _id }).lean().exec();
@@ -20,6 +20,10 @@ class GroupRepo {
     static isMember(group, user) {
         return group.members.includes(user);
     }
+    static update(group) {
+        group.updatedAt = new Date();
+        return Group_1.GroupModel.findByIdAndUpdate(group._id, { group }).lean().exec();
+    }
 }
 exports.default = GroupRepo;
-//# sourceMappingURL=GroupsRepo.js.map
+//# sourceMappingURL=GroupRepo.js.map

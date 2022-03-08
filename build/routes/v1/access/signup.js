@@ -16,6 +16,7 @@ const asyncHandler_1 = __importDefault(require("../../../helpers/asyncHandler"))
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const lodash_1 = __importDefault(require("lodash"));
 const uploadHandler_1 = __importDefault(require("../../../helpers/uploadHandler"));
+const JobRepo_1 = __importDefault(require("../../../database/repository/JobRepo"));
 const router = express_1.default.Router();
 router.post('/basic', uploadHandler_1.default.single('avatar'), validator_1.default(schema_1.default.signup), asyncHandler_1.default(async (req, res) => {
     // @CAST USER
@@ -24,6 +25,8 @@ router.post('/basic', uploadHandler_1.default.single('avatar'), validator_1.defa
     const user = await UserRepo_1.default.findByPhone(USER.tel);
     if (user)
         throw new ApiError_1.BadRequestError('User already registered');
+    if (!(await JobRepo_1.default.findById(req.body.job)))
+        throw new ApiError_1.NotFoundError("Job not found");
     const accessTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     const refreshTokenKey = crypto_1.default.randomBytes(64).toString('hex');
     USER.password = await bcrypt_1.default.hash(USER.password, 10);

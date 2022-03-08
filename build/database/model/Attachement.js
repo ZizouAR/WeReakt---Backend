@@ -56,7 +56,7 @@ const schema = new mongoose_1.Schema({
     as: {
         type: mongoose_1.Schema.Types.String,
         required: true,
-        enum: ["PROFILE" /* PROFILE */, "REQUEST" /* REQUEST */, "SUPPORT" /* SUPPORT */, "MESSAGE" /* MESSAGE */]
+        enum: ["PROFILE" /* PROFILE */, "REQUEST" /* REQUEST */, "SUPPORT" /* SUPPORT */, "MESSAGE" /* MESSAGE */, "NOTE" /* NOTE */]
     },
 }, {
     versionKey: false,

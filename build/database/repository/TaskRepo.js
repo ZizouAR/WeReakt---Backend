@@ -5,6 +5,7 @@ const Task_1 = require("../model/Task");
 class TaskRepo {
     static async create(task) {
         task.createdAt = new Date();
+        task.status = "PENDING" /* PENDING */;
         const tsk = await Task_1.TaskModel.create(task);
         return tsk.toObject();
     }
@@ -16,8 +17,8 @@ class TaskRepo {
             .lean()
             .exec();
     }
-    static read(doer, from) {
-        return Task_1.TaskModel.find(doer, from)
+    static find(doer) {
+        return Task_1.TaskModel.find(doer)
             .populate('from', config_1.USER_DETAILS)
             .sort('-createdAt')
             .lean()

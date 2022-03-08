@@ -6,7 +6,6 @@ export default interface Departement extends Document {
   name: string;
   network: Network;
   createdAt: Date;
-  updateAt?: Date;
 }
 
 const schema = new Schema(
@@ -25,10 +24,6 @@ const schema = new Schema(
     createdAt: {
       type: Date,
       required: true
-    },
-    updatedAt: {
-      type: Date,
-      required: false
     }
   },
   {

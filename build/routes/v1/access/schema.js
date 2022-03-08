@@ -22,6 +22,8 @@ exports.default = {
     signup: joi_1.default.object().keys({
         firstname: joi_1.default.string().required().min(3),
         lastname: joi_1.default.string().required().min(3),
+        job: validator_1.JoiObjectId().required(),
+        network: validator_1.JoiObjectId().required(),
         //email: Joi.string().required().email(),
         password: joi_1.default.string().required().min(6),
         picture: joi_1.default.string().optional().uri(),

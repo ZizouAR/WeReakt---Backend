@@ -10,10 +10,10 @@ const schema = new mongoose_1.Schema({
         trim: true,
         default: ""
     },
-    atachement: {
+    attachement: {
         // max 16mb
         type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'Atachement',
+        ref: 'Attachement',
         required: false,
         index: true,
     },

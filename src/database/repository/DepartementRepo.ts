@@ -15,7 +15,9 @@ export default class DepartementRepo {
     return DepartementModel.findByIdAndRemove(id).lean<Departement>().exec();
   }
 
-  public static findByNetwork(network: Network): Promise<Departement[]> {
-    return DepartementModel.find({ network }).lean<Departement>().exec();
+  public static findByNetwork(network: Types.ObjectId): Promise<Departement[]> {
+    return DepartementModel.find(network).lean<Departement>().exec();
   }
+
+  
 }

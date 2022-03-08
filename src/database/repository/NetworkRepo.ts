@@ -16,7 +16,7 @@ export default class NetworkRepo {
     return NetworkModel.findByIdAndRemove(id).lean<Network>().exec();
   }
 
-  public static findByNetwork(network: Network): Promise<Network[]> {
-    return NetworkModel.find({ network }).lean<Network>().exec();
+  public static find(id: Types.ObjectId): Promise<Network | null> {
+    return NetworkModel.findById(id).lean<Network>().exec();
   }
 }

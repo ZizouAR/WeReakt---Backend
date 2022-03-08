@@ -16,6 +16,9 @@ class JobRepo {
     static findByDepartement(departement) {
         return Job_1.JobModel.find(departement).lean().exec();
     }
+    static findById(job) {
+        return Job_1.JobModel.findById(job).lean().exec();
+    }
     static async findByNetwork(network) {
         const departements = await DepartementRepo_1.default.findByNetwork(network);
         /* '_id': { $in: [

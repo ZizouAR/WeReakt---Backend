@@ -11,7 +11,7 @@ class DepartementRepo {
         return Department_1.DepartementModel.findByIdAndRemove(id).lean().exec();
     }
     static findByNetwork(network) {
-        return Department_1.DepartementModel.find({ network }).lean().exec();
+        return Department_1.DepartementModel.find(network).lean().exec();
     }
 }
 exports.default = DepartementRepo;

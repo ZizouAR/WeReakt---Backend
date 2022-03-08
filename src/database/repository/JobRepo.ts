@@ -1,3 +1,4 @@
+import { ObjectId } from 'bson';
 import { Types } from 'mongoose';
 import Departement from '../model/Department';
 import Job, { JobModel } from '../model/Job';
@@ -19,12 +20,17 @@ export default class JobRepo {
   }
 
 
-  public static findByDepartement(departement: Departement): Promise<Job[]> {
+  public static findByDepartement(departement: Types.ObjectId): Promise<Job[]> {
     return JobModel.find(departement).lean<Job>().exec();
   }
 
+
+  public static findById(job: Job): Promise<Job | null> {
+    return JobModel.findById(job).lean<Job>().exec();
+  }
+
   
-  public static async findByNetwork(network: Network): Promise<Job[]> {
+  public static async findByNetwork(network: Types.ObjectId): Promise<Job[]> {
     const departements = await DepartementRepo.findByNetwork(network);
 
     /* '_id': { $in: [
